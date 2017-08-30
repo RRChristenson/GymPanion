@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capture Video</title>
+    <link rel="stylesheet" type="text/css" href="css/test.css" />
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="json2.js"></script> -->
+    <script type="text/javascript" charset="utf-8">
+
+    // Called when capture operation is finished
+    //
+    function captureSuccess(mediaFiles) {
+        var i, len;
+        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+            uploadFile(mediaFiles[i]);
+        }
+    }
+
+    // Called if something bad happens.
+    //
+    function captureError(error) {
+        var msg = 'An error occurred during capture: ' + error.code;
+        navigator.notification.alert(msg, null, 'Uh oh!');
+    }
+
+    // A button will call this function
+    //
+    function captureVideo() {
+        // Launch device video recording application,
+        // allowing user to capture up to 2 video clips
+        navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 2});
+    }
+
+    // Upload files to server
+    function uploadFile(mediaFile) {
+        var ft = new FileTransfer(),
+            path = mediaFile.fullPath,
+            name = mediaFile.name;
+        ft.onprogress = function(progressEvent) {
+        if (progressEvent.lengthComputable) {
+            loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
+        } else {
+            loadingStatus.increment();
+        }
+};
+        var options = new FileUploadOptions();
+        options.mimeType = "video/mpeg";
+        options.fileName = name;
+        options.chunkedMode = true;
+        console.log("Uploading");
+        ft.upload(path,
+            "http://192.168.1.3:5000/",
+            function(result) {
+                console.log('Upload success: ' + result.responseCode);
+                console.log(result.bytesSent + ' bytes sent');
+            },
+            function(error) {
+                console.log('Error uploading file ' + path + ': ' + error.code);
+            },
+            options);
+    }
+
+    </script>
+    </head>
+    <body class="app">
+        <button onclick="captureVideo();">Capture Video</button> <br>
+    </body>
+</html>

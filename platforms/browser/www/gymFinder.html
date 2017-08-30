@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 300px;
+        }
+    </style>
+  <meta charset="utf-8">
+  <title>Gym Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places"></script>
+  <script>
+    var map;
+    var infowindow;
+    function initMap() {
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      navigator.geolocation.getCurrentPosition(onSuccess, error, options);
+      function onSuccess(pos) {
+        var crd = pos.coords;
+        var center ={lat: crd.latitude, lng: crd.longitude};
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: center,
+        zoom: 13
+      });
+      infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+      service.textSearch({
+        location: center,
+        radius: 6000,
+        query: 'weightlifting gym'
+      }, callback);
+      };
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      };
+    }
+
+    function callback(results, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+      }
+    }
+
+    function createMarker(place) {
+      //get Place info
+      var placeIDen = place.placeID;
+      var placeName = place.name;
+      var placeVicinity = place.formatted_address;
+      var placeOpen = "Closed";
+      if (place.opening_hours.open_now == true){placeOpen = "Open Now"};
+      var placeLoc = place.geometry.location;
+      //create div with info on place
+      var div = document.createElement("div");
+      div.id = placeName;
+      //div.style.width = 100vw;
+      div.style.height = "100px";
+      div.innerHTML = placeName+"<br>"+placeOpen+"<br>"+placeVicinity;
+      div.className += "GymInfo"
+      document.getElementById("bottomOfFinder").appendChild(div);
+      var separator = document.createElement("div");
+      separator.setAttribute('class', 'myclass')
+      document.getElementById("bottomOfFinder").appendChild(separator);
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+      });
+    }
+  </script>
+</head>
+<body>
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+      <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1">
+        <div class="w-container">
+          <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">
+            <div class="nav-menu-header">
+              <div class="logo">Iron Ally</div>
+            </div>
+            <a class="w-clearfix w-inline-block nav-menu-link" href="home.html" data-load="1">
+                <div class="icon-list-menu">
+                  <div class="icon ion-home"></div>
+                </div>
+                <div class="nav-menu-titles">Home Page</div>
+              </a>
+              <a class="w-clearfix w-inline-block nav-menu-link" href="formCheck.html" data-load="1">
+                  <div class="icon-list-menu">
+                    <div class="icon ion-checkmark"></div>
+                  </div>
+                  <div class="nav-menu-titles">Form Checks</div>
+              </a>
+              <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html" data-load="1">
+                <div class="icon-list-menu">
+                  <div class="icon ion-ios-contact-outline"></div>
+                </div>
+                  <div class="nav-menu-titles">My Profile</div>
+              </a>
+              <a class="w-clearfix w-inline-block nav-menu-link" href="gymFinder.html" data-load="1">
+                <div class="icon-list-menu">
+                  <div class="icon ion-ios-location"></div>
+                </div>
+                <div class="nav-menu-titles">Gym Finder</div>
+              </a>
+              <a class="w-clearfix w-inline-block nav-menu-link" href="spotter.html" data-load="1">
+                <div class="icon-list-menu">
+                   <div class="icon ion-ios-eye"></div>
+                </div>
+                <div class="nav-menu-titles">Need a Spotter?</div>
+              </a>
+              <a class="w-clearfix w-inline-block nav-menu-link" href="Routines.html" data-load="1">
+                <div class="icon-list-menu">
+                  <div class="icon ion-ios-pulse-strong"></div>
+                </div>
+                  <div class="nav-menu-titles">Get a Routine</div>
+              </a>
+              <a class="w-clearfix w-inline-block nav-menu-link" href="Coaching.html" data-load="1">
+                <div class="icon-list-menu">
+                  <div class="icon ion-ios-people"></div>
+                </div>
+                  <div class="nav-menu-titles">Coaching</div>
+              </a>
+              <div class="separator-bottom"></div>
+              <div class="separator-bottom"></div>
+              <div class="separator-bottom"></div>
+            </nav>
+            <div class="wrapper-mask" data-ix="menu-mask"></div>
+            <div class="navbar-title">Gym Finder</div>
+            <div class="w-nav-button navbar-button left" id="menu-button" data-ix="hide-navbar-icons">
+              <div class="navbar-button-icon home-icon">
+                <div class="bar-home-icon top"></div>
+                <div class="bar-home-icon middle"></div>
+                <div class="bar-home-icon bottom"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="body">
+        <div class="news-container item-new">
+          <div>
+          <div class="separator-button"></div>
+            <p class="HeaderFinder2">  Gyms near you</p>
+          <div class="separator-button"></div>
+            </div>
+            </div>
+            <!--<div class="w-widget w-widget-map hero-map" data-widget-latlng="51.507351,-0.127758" data-widget-style="roadmap" data-widget-zoom="12" data-widget-tooltip="We are here!"></div>
+            -->
+            <div class="gymFind" id="map"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places&callback=initMap" async defer></script>
+            <div class="text-new no-borders">
+            <div class="separator-button"></div>
+            <div  id="bottomOfFinder"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="page-content loading-mask" id="new-stack">
+      <div class="loading-icon">
+        <div class="navbar-button-icon icon ion-load-d"></div>
+      </div>
+    </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

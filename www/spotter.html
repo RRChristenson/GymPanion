@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+        <script src="./js/navMenu.js"></script>
+
+        <div class="body">
+            <div class="homeboxFormCheck"> 
+                <div class="homeformshade">
+                <div class="separator-fields"></div>
+                <div class="separator-fields"></div>
+                <p class="description-new larger" id="debug" style="color:white">Adjust the search settings below to find a gym partner</p>
+                <div class="separator-fields"></div>
+                </div>
+              </div>
+            <div class="separator-fields"></div>
+            <div class="separator-fields"></div>
+            <div class="w-form" style="padding-left:15px; padding-right:15px">
+              <form id="search-form" name="search-form" action="#">
+                <div class="separator-button-input"></div>
+                <div>
+                  <label class="label-form" for="field" style="color:black">Radius (Miles)</label>
+                  <input class="w-input input-form" id="search-radius" type="number" name="radius" data-name="radius" required="required">
+                  <div class="separator-fields"></div>
+                </div>
+                <div class="separator-fields"></div>
+                <div>
+                  <div class="w-clearfix input-form one-line">
+                    <label class="label-form middle" for="email" style="color:black">Gender</label>
+                    <div class="w-clearfix radios-container">
+                      <div class="w-radio w-clearfix radio-button">
+                        <div class="radio-bullet-replacement"></div>
+                        <input class="w-radio-input radio-bullet" id="node" type="radio" name="Radio1" value="1" data-name="Radio1">
+                        <label class="w-form-label" for="node">Female</label>
+                      </div>
+                      <div class="w-radio w-clearfix radio-button">
+                        <div class="radio-bullet-replacement checked"></div>
+                        <input class="w-radio-input radio-bullet" id="node-2" type="radio" name="Radio1" value="0" data-name="Radio1">
+                        <label class="w-form-label" for="node-2">Male</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="separator-fields"></div>
+                </div>
+              </form>
+              <input class="w-button action-button" style="background-color:#402244" id="searchSpotters" type="submit" onclick=""value="Search" data-wait="Please wait...">
+            </div>
+          </div>
+        </div>
+        <div class="page-content loading-mask" id="new-stack">
+          <div class="loading-icon">
+            <div class="navbar-button-icon icon ion-load-d"></div>
+          </div>
+        </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

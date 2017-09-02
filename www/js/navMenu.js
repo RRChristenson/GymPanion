@@ -64,6 +64,11 @@ document.write('\
   <div class="bar-home-icon bottom"></div>\
 </div>\
 </div>\
+<div class="w-nav-button navbar-button right" id="message-button" data-ix="hide-navbar-icons">\
+<div class=navbar-button-icon">\
+  <div class="icon ion-email"></div>\
+</div>\
+</div>\
 </nav>\
 </div>\
 </div>\

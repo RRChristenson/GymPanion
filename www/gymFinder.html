@@ -68,15 +68,12 @@
       //create div with info on place
       var div = document.createElement("div");
       div.id = placeName;
-      var pgraph = document.createElement("p");
-      //div.style.width = 100vw;
+      var pgraph = document.createElement("div");
       div.style.height = "100px";
-      //pgraph.style.marginLeft = "5px";
-      //pgraph.innerHTML = placeName+"<br>"+placeOpen+"<br>"+placeVicinity;
-      div.className += "homebox"
+      div.className += "gymBox"
       document.getElementById("bottomOfFinder").appendChild(div);
       pgraph.style.textAlign="center";
-      pgraph.innerHTML = placeName+"<br>"+placeOpen+"<br>"+placeVicinity;
+      pgraph.innerHTML = "<p style=color:white>"+placeName+"<br>"+placeOpen+"<br>"+placeVicinity+"</p>";
       div.appendChild(pgraph);
       var separator = document.createElement("div");
       separator.setAttribute('class', 'myclass')

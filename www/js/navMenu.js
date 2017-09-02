@@ -4,7 +4,11 @@ document.write('\
 <div class="w-container">\
 <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">\
     <div class="nav-menu-header">\
-      <div class="navbar-title-test">GymPanion</div>\
+    <div class="profile-menu">\
+    <img class="img-circle border-effect" src="images/pic3.jpeg" alt=" ">\
+      <h3>Rob Christenson</h3>\
+      <h4>Something Something</h4>\
+      </div>\
     </div>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="home.html" data-load="1">\
       <div class="icon-list-menu">\

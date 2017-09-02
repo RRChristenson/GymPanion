@@ -18,22 +18,28 @@
         <script src="./js/navMenu.js"></script>
       <div class="body">
         <div class="home-content">
-          <div class="text-new grey">
-            <div class="separator-fields"></div>
-            <p class="logo">GymPanion</p>
-            <div class="separator-fields"></div>
-            <p class="description-new larger">Select the menu icon at the top left to browse form check videos, update your profile or search for a gym partner!</p>
+          <div class="text-new.no-borders">
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+            <div class="homebox">
+              <div class="separator-fields"></div>
+              <p class="description-new larger">Select the menu icon at the top left to browse form check videos, update your profile or search for a gym partner!</p>
+              </div>
             <div class="separator-fields"></div>
             </div>
+            <div class="separator-fields"></div>
+            <div class="separator-fields"></div>
+        <div class="homebox">
           <div class="w-slider home-slider" data-animation="slide" data-duration="500" data-infinite="1" data-nav-spacing="5" data-delay="4000" data-autoplay="1">
             <div class="w-slider-mask">
-              <div class="w-slide slide">
-                <h1 class ="featured-user" background="white">Featured User: Rob Christenson</h1>
+              <div class="w-slide slide" id="f1bg">
+                <h1 class ="featured-user" id="f1" background="white">Featured User: </h1>
               </div>
-              <div class="w-slide slide bg2">
-              <h1 class ="featured-user" background="white">Featured User: Missy W</h1></div>
-              <div class="w-slide slide bg3">
-                <h1 class ="featured-user" background="white">Featured User: Rob Christenson</h1></div>
+              <div class="w-slide slide bg2" id="f2bg">
+              <h1 class ="featured-user" id="f2" background="white">Featured User: </h1></div>
+              <div class="w-slide slide bg3" id="f3bg">
+                <h1 class ="featured-user" id="f3" background="white">Featured User: </h1></div>
             </div>
             <div class="w-slider-arrow-left arrow-icon">
               <div class="w-icon-slider-left"></div>
@@ -43,31 +49,11 @@
             </div>
             <div class="w-slider-nav w-round slider-bullets"></div>
           </div>
-          <div class="text-new no-borders grey">
+          <div class="description-new larger">Click on the featured users' picture to see their stats and social media profiles</div>
+        </div>
+          <div class="text-new.no-borders">
             <div>
-              <h2 class="title-new">Follow us</h2>
-              <div class="separator-fields"></div>
               <div class="separator-button"></div>
-              <div>
-                <a class="w-clearfix w-inline-block small-button social facebook" href="#">
-                  <div class="icon-button">
-                    <div class="icon ion-social-facebook"></div>
-                  </div>
-                  <div class="text-button">FACEBOOK</div>
-                </a>
-                <a class="w-clearfix w-inline-block small-button social twitter" href="#">
-                  <div class="icon-button">
-                    <div class="icon ion-social-instagram"></div>
-                  </div>
-                  <div class="text-button">INSTAGRAM</div>
-                </a>
-                <a class="w-clearfix w-inline-block small-button social last" href="#">
-                  <div class="icon-button">
-                    <div class="icon ion-social-googleplus"></div>
-                  </div>
-                  <div class="text-button">GOOGLE</div>
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -91,6 +77,36 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript"> $.ajax({
+    
+           type : "GET",
+           url : "http://gympanion.pythonanywhere.com/getRecentFormChecks",
+           dataType : 'json',
+           success: function(response){
+            let debug = document.getElementById("debug");
+            //debug.innerHTML=response["Rob"];
+            var i = 1;
+                for (var key in response){
+                    let div = document.getElementById("f"+i+"bg");
+                    var attrName = key;
+                    var attrValue = response[key];
+                    div.style.backgroundImage = "url('"+attrValue+"')";
+                    let text = document.getElementById("f"+i);
+                    text.innerHTML += key;
+                    i++;
+                }
+        
+            
+            //div.style.backgroundImage = "url('"+response+"')";
+
+            //debug.innerHTML=response.data;
+            
+           },
+           error : function(xhr, ppp,rrr) {
+               alert(xhr+"Errr is occured"+ppp+rrr);
+           }
+       });
+  </script>
   <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

@@ -68,11 +68,16 @@
       //create div with info on place
       var div = document.createElement("div");
       div.id = placeName;
+      var pgraph = document.createElement("p");
       //div.style.width = 100vw;
       div.style.height = "100px";
-      div.innerHTML = placeName+"<br>"+placeOpen+"<br>"+placeVicinity;
-      div.className += "GymInfo"
+      //pgraph.style.marginLeft = "5px";
+      //pgraph.innerHTML = placeName+"<br>"+placeOpen+"<br>"+placeVicinity;
+      div.className += "homebox"
       document.getElementById("bottomOfFinder").appendChild(div);
+      pgraph.style.textAlign="center";
+      pgraph.innerHTML = placeName+"<br>"+placeOpen+"<br>"+placeVicinity;
+      div.appendChild(pgraph);
       var separator = document.createElement("div");
       separator.setAttribute('class', 'myclass')
       document.getElementById("bottomOfFinder").appendChild(separator);
@@ -96,18 +101,22 @@
         <div class="news-container item-new">
           <div>
           <div class="separator-button"></div>
-            <p class="HeaderFinder2">  Gyms near you</p>
+            <p class="logo" style="text-align:center">Gyms near you</p>
           <div class="separator-button"></div>
             </div>
             </div>
             <!--<div class="w-widget w-widget-map hero-map" data-widget-latlng="51.507351,-0.127758" data-widget-style="roadmap" data-widget-zoom="12" data-widget-tooltip="We are here!"></div>
             -->
-            <div class="gymFind" id="map"></div>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places&callback=initMap" async defer></script>
-            <div class="text-new no-borders">
+            <div class="homebox">
+              <div class="gymFind" id="map"></div>
+              <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places&callback=initMap" async defer></script>
+            </div>
             <div class="separator-button"></div>
-            <div  id="bottomOfFinder"></div>
-              </div>
+            <div class="text-new no-borders">
+              <div class="separator-button"></div>
+              <div  id="bottomOfFinder"></div>
+            </div>
+              
             </div>
           </div>
         </div>

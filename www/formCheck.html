@@ -19,11 +19,20 @@
     <div class="page-content" id="main-stack">
       <script src="./js/navMenu.js"></script>
       <div class="body">
-        <div class="w-clearfix grey-header">
-          <h2 class="HeaderFinder2">Form Checks</h2>
-          <p class="description-new larger" id="debug">Browse new form check videos or upload your own to get critiqued!</p>
-          <div class="w-clearfix w-inline-block nav-menu-link">Newest Form Checks:</div>          <div class="w-clearfix portfolio-gallery"><a class="w-inline-block portfolio-item" href="#">
-              <div class="portfolio-image bg2"></div>
+        <div>
+          
+          <div class="homebox" style="background-color:#c1c3f3">
+            <div class="separator-fields"></div>
+            <h2 class="Welcome-Message" style="color:white">Form Checks</h2>
+            <div class="separator-fields"></div>
+            <p class="description-new larger" id="debug" style="color:white">Browse new form check videos or upload your own to get critiqued!</p>
+            <div class="separator-fields"></div>
+          </div>
+          <div class="separator-fields"></div>
+          <div class="separator-fields"></div>
+          <p style="color:#f07da8; font-size:15px">Newest Form Checks:</div>          
+            <div class="w-clearfix portfolio-gallery"><a class="w-inline-block portfolio-item" href="#">
+              <div class="portfolio-image bg2" id="FormBg4"></div>
               <script type="application/json" class="w-json">
                 { "group": "portfolio", "items": [{
                   "url": "images/placeholder.png",
@@ -37,7 +46,7 @@
               </script>
             </a>
             <a class="w-inline-block portfolio-item" href="#">
-                <div class="portfolio-image bg2"></div>
+                <div class="portfolio-image bg2" id="FormBg3"></div>
                 <script type="application/json" class="w-json">
                   { "group": "portfolio", "items": [{
                     "url": "images/placeholder.png",
@@ -51,7 +60,7 @@
                 </script>
               </a>
               <a class="w-inline-block portfolio-item" href="#">
-                  <div class="portfolio-image bg2"></div>
+                  <div class="portfolio-image bg2" id="FormBg2"></div>
                   <script type="application/json" class="w-json">
                     { "group": "portfolio", "items": [{
                       "url": "images/placeholder.png",
@@ -79,10 +88,11 @@
                     </script>
                   </a>
           </div>
+          <script type="text/javascript" src="js/getRecentFormChecks.js"></script>
           <div class="separator-fields"></div>
           <input class="btn w-button " id="goToUploadForm" type="submit" value="Upload a form check" data-wait="Please wait...">
           <input class="btn w-button " id="goToMyFormChecks" type="submit" value="Review my form checks" data-wait="Please wait...">
-          <input class="btn w-button" id="goToBrowseChecks" type="submit" onclick="getRecent()"value="Browse form checks" data-wait="Please wait...">
+          <input class="btn w-button" id="goToBrowseChecks" type="submit" onclick=""value="Browse form checks" data-wait="Please wait...">
           </section>
   <script src="js/webfont.js"></script>
   <script>

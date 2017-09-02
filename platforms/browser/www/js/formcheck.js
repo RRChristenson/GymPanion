@@ -11,7 +11,7 @@ function getRecent(){
                 let div = document.getElementById("FormBg1");
                 let debug = document.getElementById("debug");
                 debug.innerHTML=response;
-                div.style.backgroundImage = "url('"+response+"')";
+                //div.style.backgroundImage = "url('"+response+"')";
                },
                error : function(xhr, ppp,rrr) {
                    alert(xhr+"Errr is occured"+ppp+rrr);

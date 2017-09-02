@@ -1,9 +1,10 @@
 document.write('\
 <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1">\
+<p class="navbar-title-test">GymPanion</p>\
 <div class="w-container">\
 <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">\
     <div class="nav-menu-header">\
-      <div class="logo">GymPanion</div>\
+      <div class="navbar-title-test">GymPanion</div>\
     </div>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="home.html" data-load="1">\
       <div class="icon-list-menu">\
@@ -11,17 +12,17 @@ document.write('\
       </div>\
       <div class="nav-menu-titles">Home Page</div>\
     </a>\
+    <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html" data-load="1">\
+    <div class="icon-list-menu">\
+      <div class="icon ion-ios-contact-outline"></div>\
+    </div>\
+      <div class="nav-menu-titles">My Profile</div>\
+  </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="formCheck.html" data-load="1">\
         <div class="icon-list-menu">\
           <div class="icon ion-checkmark"></div>\
         </div>\
         <div class="nav-menu-titles">Form Checks</div>\
-    </a>\
-    <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html" data-load="1">\
-      <div class="icon-list-menu">\
-        <div class="icon ion-ios-contact-outline"></div>\
-      </div>\
-        <div class="nav-menu-titles">My Profile</div>\
     </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="gymFinder.html" data-load="1">\
       <div class="icon-list-menu">\

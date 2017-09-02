@@ -8,15 +8,31 @@
 4. Elements
 5. Extra
 -------------------------------------------------------------------*/
+@font-face {
+  font-family: 'Shrikhand';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Shrikhand-Regular.ttf') format('truetype');
+  unicode-range: U+0964-0965, U+0A80-0AFF, U+200B-200D, U+20B9, U+25CC, U+A830-A839;
+}
 
+/* latin */
+@font-face {
+  font-family: 'Shadows Into Light';
+  font-style: normal;
+  font-weight: 400;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  src: url('fonts/Baloo-Regular.ttf') format('truetype');
+}
 
 /* [1. BODY] */
 
 body {
   background-color: white;
-  font-family: Montserrat, sans-serif;
+  /*font-family: Montserrat, sans-serif;*/
+  font-family: 'Shadows Into Light';
   color: #333;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 20px;
 }
 h1 {
@@ -86,8 +102,14 @@ a {
   z-index: 5;
   height: 60px;
   padding-top: 15px;
-  background-color: #4C7EFD;
+  /*background-color: #9b63f8;*/
+  background-color: #9b63f8;
+  background-image: -webkit-linear-gradient(107deg, #9b63f8, #809ffc 98%);
+  background-image: linear-gradient(343deg, #9b63f8, #809ffc 98%);
   color: #000000;
+  -webkit-box-shadow: 10px 10px 29px -9px #9b63f8;
+  -moz-box-shadow: 10px 10px 29px -9px #9b63f8;
+  box-shadow: 10px 10px 29px -9px #9b63f8;
 }
 .navbar.transparent {
   background-color: transparent;
@@ -116,7 +138,8 @@ a {
   width: 45px;
   height: 45px;
   padding: 0px;
-  color: #ccc;
+  font-weight: 800;
+  color: white;
   line-height: 49px;
   text-align: center;
 }
@@ -190,6 +213,7 @@ a {
 }
 .w-slider.home-slider{
   height: 270px;
+
 }
 .n-p-l{
   padding-left: 0px !important;
@@ -289,14 +313,14 @@ a {
   padding-top: 50px;
 }
 .nav-menu-link {
-  /*display: block;
+  display: block;
   height: 50px;
   padding: 0px;
   color: rgba(0, 0, 0, 0.72);
   font-size: 13px;
-  text-decoration: none;*/
+  text-decoration: none;
 
-  text-transform: uppercase;
+  /*text-transform: uppercase;
   font-family: 'Squada One';
   font-weight: 800;
   display: block;
@@ -323,7 +347,7 @@ a {
   box-shadow: 
     0 0 0 1px rgba(0,0,0,.4) inset, 
     0 0 20px -5px rgba(0,0,0,.4),
-    0 0 0px 3px #FFF inset;
+    0 0 0px 3px #FFF inset;*/
 }
 .nav-menu-link:active {
   color: #000000;
@@ -342,14 +366,14 @@ a {
   float: left;
   line-height: 48px;
   text-align: left;
-  color: rgba(0, 0, 0, 0.84);
+  color: rgb(255, 255, 255);
 }
 .icon-list-menu {
   display: inline-block;
   width: 40px;
   height: 50px;
   float: left;
-  color: rgba(0, 0, 0, 0.84);
+  color:white;
   font-size: 24px;
   line-height: 48px;
   text-align: left;
@@ -373,33 +397,76 @@ a {
   color: #F9F7F7;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 30px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: -2px;
-  text-shadow: #3F3F3F 3px 2px 0;
+  /*text-shadow: #3F3F3F 3px 2px 0;*/
 
   position: absolute;
   display: block;
   width: 100%;
   height: 45px;
+  margin-top: 10px;
   margin-right: auto;
   margin-left: auto;
   font-size: 15px;
   line-height: 45px;
   text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.homebox{
+  -webkit-box-shadow: 3px 6px 22px 1px rgba(158,158,158,1)!important;
+  -moz-box-shadow: 3px 6px 22px 1px rgba(158,158,158,1)!important;
+  box-shadow: 3px 6px 22px 1px rgba(158,158,158,1)!important;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+.pink {
+  background-color: #f07da8;
 }
 .logo {
   font-family: 'Open Sans', sans-serif;
-  color: #555;
+  /*color: #555;*/
+  color:#f07da8;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 30px;
   font-weight: 800;
-  letter-spacing: -2px;
   line-height: 1;
-  text-shadow: #EDEDED 3px 2px 0;
+  /*text-shadow: #EDEDED 3px 2px 0;*/
   position: relative;
 }
+.logoLogin {
+  font-family: 'Open Sans', sans-serif;
+  /*color: #555;*/
+  color:#FFFFFF;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  /*text-shadow: #EDEDED 3px 2px 0;*/
+  position: relative;
+}
+.Welcome-Message {
+  color: #f07da8;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  /*text-shadow: #EDEDED 3px 2px 0;*/
+  text-align: center;
+}
+
 .slogan {
   color: #c2c2c2;
   font-size: 11px;
@@ -497,7 +564,6 @@ a {
   width: 100%;
   height: 49px;
   padding: 12px;
-  border-radius: 1px;
   background-color: #4C7EFD;
   color: white;
   font-size: 12px;
@@ -505,6 +571,7 @@ a {
   text-align: center;
   letter-spacing: 1px;
   text-decoration: none;
+  border-radius: 12px;
 }
 .btn{
   border-radius: 5px;
@@ -545,9 +612,10 @@ a {
   height: 21px;
 }
 .label-form {
+  font-family: 'Shadows Into Light';
   margin-bottom: 0px;
   color: #ccc;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 11px;
   letter-spacing: 1px;
 }
@@ -787,9 +855,9 @@ a {
   opacity: 0;
 }
 .page-content.bg-gradient {
-  background-color: #FFFFFF;
-  background-image: -webkit-linear-gradient(107deg, #FFFFFF, #C6C2C2 98%);
-  background-image: linear-gradient(343deg, #FFFFFF, #C6C2C2 98%);
+  background-color:white;
+  /*background-image: -webkit-linear-gradient(107deg, #FFFFFF, #C6C2C2 98%);
+  background-image: linear-gradient(343deg, #FFFFFF, #C6C2C2 98%);*/
 }
 .loading-icon {
   position: absolute;
@@ -961,11 +1029,11 @@ a {
 }
 .description-new {
   padding-right: 0px;
-  padding-left: 0px;
+  padding-left: 15px;
   font-size: 11px;
 }
 .description-new.larger {
-  font-size: 13px;
+  font-size: 15px;
 }
 .FinderHeader{
   font-size: 20px;
@@ -986,7 +1054,7 @@ a {
   width:100wh;
 }
 .news-container.item-new {
-  width:100vw;
+  width:100%;
   margin-top: 0px;
   padding-right: 0px;
   padding-left: 0px;
@@ -1300,9 +1368,9 @@ a {
 }
 .bar-home-icon {
   width: 100%;
-  height: 1px;
+  height: 2px;
   margin-bottom: 7px;
-  background-color: #ccc;
+  background-color: white;
 }
 .bar-home-icon.top {
   width: 80%;
@@ -1359,9 +1427,9 @@ a {
   color: rgba(255, 255, 255, 0.66);
 }
 .bg-gradient {
-  background-color: #FFFFFF;
-  background-image: -webkit-linear-gradient(107deg, #FFFFFF, #F2F3FF 98%);
-  background-image: linear-gradient(343deg, #FFFFFF, #F2F3FF 98%);
+  background-color: #809ffc;
+  background-image: -webkit-linear-gradient(107deg, #809ffc, #c1c3f3 98%);
+  background-image: linear-gradient(343deg, #809ffc, #c1c3f3 98%);
 }
 .list-calendar-events {
   margin-right: 20px;
@@ -1553,6 +1621,7 @@ a {
 }
 .home-content {
   background-color: white;
+  height:100vh;
 }
 .title-h1 {
   margin-top: 0px;
@@ -1732,8 +1801,10 @@ input[type=text]:focus, textarea:focus {
 {
   margin-top: 0px;
   margin-bottom: 0px;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.60);
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  background-color: #809ffc;
 }
 .HomeHeader {
   font-family: 'Open Sans', sans-serif;
@@ -1821,3 +1892,4 @@ input[type=text]:focus, textarea:focus {
     0 0 20px -5px rgba(0,0,0,.4),
     0 0 0px 3px #FFF inset;
 }
+

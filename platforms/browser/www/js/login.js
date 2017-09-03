@@ -1,14 +1,18 @@
-var login = {
-    // Application Constructor
-    initialize: function() {
-        let button = document.getElementById("logIn");
-        button.addEventListener("click", this.goToHome, false);
+function sendLogin(){
+    let user = Document.getElementById("username-field").value;
+    let pass = Document.getElementById("password-field").value;
+
+    $.ajax({
         
-    },
-    goToHome: function()
-    {
-       window.location = "home.html";
-
-    },
-
-};
+               type : "POST",
+               url : "http://192.168.1.3:5000/login",
+               dataType : 'json',
+               username: user,
+               password: pass,
+               success: function(response){               
+               },
+               error : function(xhr) {
+                   alert(xhr[1]);
+               }
+           });
+}

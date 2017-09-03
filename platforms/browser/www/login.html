@@ -11,30 +11,33 @@
   <link rel="apple-touch-icon" href="img/logo.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/login.js"></script>
+
 </head>
 <body>
   <section class="w-section mobile-wrapper">
     <div class="page-content bg-gradient" id="main-stack" data-scroll="0">
       <div class="body padding">
         <div class="logo-login"></div>
-        <div class="logoLogin">GymPanion</div>
+        <div class="logoLogin" id="debug">GymPanion</div>
         </div><div class="bottom-section padding">
           <div class="w-form">
-            <form id="submit-form" name="email-form" action="#" data-redirect="home.html">
+            <form id="login" name="login" class="login" action="#" data-redirect="home.html">
               <div>
-                <label class="label-form light" for="email-field">Username</label>
-                <input class="w-input input-form light" id="email-field" type="email" name="email" data-name="email" required="required">
+                <label class="label-form light" for="username">Username</label>
+                <input class="w-input input-form light" id="username-field" type="text" name="username" data-name="username" required="required">
                 <div class="separator-fields"></div>
               </div>
               <div>
-                <label class="label-form light"  for="email">Pasword</label>
+                <label class="label-form light"  for="password">Pasword</label>
                 <div class="block-input-combined">
                   <input class="w-input input-form light left"  id="password-field" type="password" name="password" data-name="password" required="required"><a class="right-input-link"  href="forgot.html" data-load="1">Forgot Password</a>
                 </div>
                 <div class="separator-button-input"></div>
               </div>
               <input class="w-button action-button" style="background-color:#402244" id="logIn" type="submit" value="Sign In" data-wait="Please wait...">
-              <div class="separator-button"></div><a class="link-upper" " href="signup.html" data-load="1">Don't have an account? <strong  class="b-link">Sign Up</strong></a>
+              <div class="separator-button"></div><a class="link-upper" href="signup.html" data-load="1">Don't have an account? <strong  class="b-link">Sign Up</strong></a>
             </form>
             
           </div>
@@ -55,14 +58,49 @@
       }
     });
   </script>
-  <script>
-    login.initialize();
-  </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script>
+    $('.login').submit(function () {
+      var input_name = "username";
+      var user = $("#login :input[name='"+input_name+"']")[0].value; 
+      var input_name2 = "password";
+      var pass = $("#login :input[name='"+input_name2+"']")[0].value;
+      alert(user + pass);
+      data = {
+                      "username":user,
+                      "password":pass
+                     };
+      $.ajax({
+        
+               type : "GET",
+               url : "http://gympanion.pythonanywhere.com/login",
+               headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+               contentType:'application/json; charset=utf-8',
+               dataType : 'json',
+               data: data,
+               success: function(response){   
+                for (var key in response){
+                    var keyVal = key;
+                    var authenticated = response[keyVal];
+                    if (authenticated == 'true')
+                    {
+                      window.location = "home.html";
+                    }
+                }         
+               },
+               error : function() {
+                   alert("err");
+               }
+           });
+      return false;
+    });
+  </script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/login.js"></script>
   <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+  
 </body>
 </html>

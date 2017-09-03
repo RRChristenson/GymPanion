@@ -5,9 +5,8 @@ document.write('\
 <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">\
     <div class="nav-menu-header">\
     <div class="profile-menu">\
-    <img class="img-circle border-effect" src="images/pic3.jpeg" alt=" ">\
-      <h3>Rob Christenson</h3>\
-      <h4>Something Something</h4>\
+    <img class="img-circle border-effect" id="menuProPic" src="images/pic3.jpeg" alt=" ">\
+      <h3 id="username">Rob Christenson</h3>\
       </div>\
     </div>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="home.html" data-load="1">\
@@ -22,23 +21,17 @@ document.write('\
     </div>\
       <div class="nav-menu-titles">My Profile</div>\
   </a>\
-    <a class="w-clearfix w-inline-block nav-menu-link" href="formCheck.html" data-load="1">\
-        <div class="icon-list-menu">\
-          <div class="icon ion-checkmark"></div>\
-        </div>\
-        <div class="nav-menu-titles">Form Checks</div>\
-    </a>\
+  <a class="w-clearfix w-inline-block nav-menu-link" href="spotter.html" data-load="1">\
+  <div class="icon-list-menu">\
+     <div class="icon ion-ios-eye"></div>\
+  </div>\
+  <div class="nav-menu-titles">Find a gym partner</div>\
+  </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="gymFinder.html" data-load="1">\
       <div class="icon-list-menu">\
         <div class="icon ion-ios-location"></div>\
       </div>\
       <div class="nav-menu-titles">Gym Finder</div>\
-    </a>\
-    <a class="w-clearfix w-inline-block nav-menu-link" href="spotter.html" data-load="1">\
-      <div class="icon-list-menu">\
-         <div class="icon ion-ios-eye"></div>\
-      </div>\
-      <div class="nav-menu-titles">Need a Spotter?</div>\
     </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="Routines.html" data-load="1">\
       <div class="icon-list-menu">\

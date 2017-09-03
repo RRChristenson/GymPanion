@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/login.js"></script>
 
 </head>
@@ -65,7 +66,6 @@
       var user = $("#login :input[name='"+input_name+"']")[0].value; 
       var input_name2 = "password";
       var pass = $("#login :input[name='"+input_name2+"']")[0].value;
-      alert(user + pass);
       data = {
                       "username":user,
                       "password":pass
@@ -87,11 +87,13 @@
                     if (authenticated == 'true')
                     {
                       window.location = "home.html";
+                      localStorage.username=user;
+                      localStorage.authenticated=true;
                     }
                 }         
                },
                error : function() {
-                   alert("err");
+                   navigator.notification.alert("Invalid Username or Password");
                }
            });
       return false;

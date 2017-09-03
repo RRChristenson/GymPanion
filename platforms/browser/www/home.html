@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="css/framework.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <script type="text/javascript" src="cordova.js"></script>
   <link rel="apple-touch-icon" href="img/logo.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
@@ -77,6 +78,29 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript"> 
+    document.getElementById("username").innerHTML=localStorage.username;
+    data = {
+                      "username":localStorage.username
+                     };
+    $.ajax({
+    
+           type : "GET",
+           url : "http://gympanion.pythonanywhere.com/getProPic",
+           dataType : 'json',
+           data: data,
+           success: function(response){
+                for (var key in response){
+                    var attrName = key;
+                    var attrValue = response[key];
+                    $("#menuProPic").attr("src", attrValue);
+                }
+           },
+           error : function() {
+               navigator.notification.alert("error getting profile picture for navigation menu");
+           }
+       });
+  </script>
   <script type="text/javascript"> $.ajax({
     
            type : "GET",
@@ -84,7 +108,6 @@
            dataType : 'json',
            success: function(response){
             let debug = document.getElementById("debug");
-            //debug.innerHTML=response["Rob"];
             var i = 1;
                 for (var key in response){
                     let div = document.getElementById("f"+i+"bg");
@@ -95,12 +118,6 @@
                     text.innerHTML += key;
                     i++;
                 }
-        
-            
-            //div.style.backgroundImage = "url('"+response+"')";
-
-            //debug.innerHTML=response.data;
-            
            },
            error : function(xhr, ppp,rrr) {
                alert(xhr+"Errr is occured"+ppp+rrr);

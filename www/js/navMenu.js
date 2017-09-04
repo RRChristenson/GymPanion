@@ -65,4 +65,26 @@ document.write('\
 </nav>\
 </div>\
 </div>\
+<script type="text/javascript">\
+document.getElementById("username").innerHTML=localStorage.username;\
+data = {\
+                  "username":localStorage.username\
+                 };\
+$.ajax({\
+       type : "GET",\
+       url : "http://gympanion.pythonanywhere.com/getProPic",\
+       dataType : \'json\',\
+       data: data,\
+       success: function(response){\
+            for (var key in response){\
+                var attrName = key;\
+                var attrValue = response[key];\
+                $("#menuProPic").attr("src", attrValue);\
+            }\
+       },\
+       error : function() {\
+           navigator.notification.alert("error getting profile picture for navigation menu");\
+       }\
+   });\
+</script>\
 ');

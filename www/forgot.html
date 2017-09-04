@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Sign Up</title>
+  <title>Reset Password</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/framework.css">
@@ -20,7 +20,7 @@
       <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1">
         <div class="w-container">
           <div class="wrapper-mask" data-ix="menu-mask"></div>
-          <div class="navbar-title">Sign Up</div>
+          <div class="navbar-title">Reset Password</div>
           <a class="w-inline-block navbar-button" href="login.html" data-load="1">
             <div class="navbar-button-icon icon ion-ios-close-empty"></div>
           </a>
@@ -30,25 +30,14 @@
         <div class="logo-login smaller"></div>
         </div><div class="bottom-section padding">
           <div class="w-form">
-            <form id="signup" name="register" id="register" action="#">
-              <div>
-                <label class="label-form light" for="full-name-field">User Name</label>
-                <input class="w-input input-form light" id="full-name-field" type="text" name="username" data-name="full-name" required="required">
-                <div class="separator-fields"></div>
-              </div>
+            <form id="forgotpass" name="forgotpass" id="forgotpass" action="#">
               <div>
                 <label class="label-form light" for="email-field">Email</label>
                 <input class="w-input input-form light" id="email-field" type="email" name="email" data-name="email" required="required">
                 <div class="separator-fields"></div>
               </div>
-              <div>
-                <label class="label-form light" for="password-ield">Password</label>
-                <input class="w-input input-form light" id="password-ield" type="password" name="password" data-name="password" required="required">
-                <div class="separator-fields"></div>
-              </div>
               <div class="separator-button-input"></div>
-              <input class="w-button action-button" type="submit" style="background-color:#402244" value="Sign Up" data-wait="Please wait...">
-              <div class="separator-button"></div><a class="link-upper" href="login.html" data-load="1">Already have an account? <strong class="b-link">Sign in</strong></a>
+              <input class="w-button action-button" type="submit" style="background-color:#402244" value="Reset Password" data-wait="Please wait...">
             </form>
             
           </div>
@@ -70,22 +59,16 @@
     });
   </script>
   <script>
-    $('#signup').submit(function () {
-      var user_name = "username";
-      var user = $("#signup :input[name='"+user_name+"']")[0].value; 
-      var pass_name = "password";
-      var pass = $("#signup :input[name='"+pass_name+"']")[0].value;
+    $('#forgotpass').submit(function () {
       var email_name ="email";
-      var email= $("#signup :input[name='"+email_name+"']")[0].value;
+      var email= $("#forgotpass :input[name='"+email_name+"']")[0].value;
       data = {
-                      "username":user,
-                      "password":pass,
                       "email":email
                      };
       $.ajax({
         
                type : "GET",
-               url : "http://gympanion.pythonanywhere.com/register",
+               url : "http://192.168.1.3:5000/forgot",
                headers: {
                     'Access-Control-Allow-Origin': '*'
                 },
@@ -95,16 +78,16 @@
                success: function(response){   
                 for (var key in response){
                     var keyVal = key;
-                    var registered = response[keyVal];
-                    if (registered == 'true')
+                    var reset = response[keyVal];
+                    if (reset == 'true')
                     {
-                      navigator.notification.alert("Registration complete, proceed to login");
+                      navigator.notification.alert("Password reset sent to email");
                       window.location = "login.html";
                     }
                 }         
                },
                error : function() {
-                   navigator.notification.alert("Error registering");
+                   navigator.notification.alert("Error resetting password");
                }
            });
       return false;

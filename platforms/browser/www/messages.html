@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Messages</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <script src="js/pubnub.js"></script>
+  <script src="http://cdn.pubnub.com/pubnub-3.4.4.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  
+</head>
+<body>
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+        <script src="./js/navMenu.js"></script>
+      <div class="body">
+        <ul data-role="listview" class="list list-messages" id="messageList">
+          <li class="list-message" data-ix="list-item">
+            <a class="w-clearfix w-inline-block" href="chat.html" data-load="1">
+              <div class="w-clearfix column-left">
+                <div class="image-message"><img src="images/placeholder.png">
+                </div>
+              </div>
+              <div class="column-right">
+                <div class="message-title">James White</div>
+                <div class="message-text">&nbsp;I've seen the best template on the market. Really great design, clean and modern, grea</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-content loading-mask" id="new-stack">
+      <div class="loading-icon">
+        <div class="navbar-button-icon icon ion-load-d"></div>
+      </div>
+    </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+  <script type="text/javascript" src="js/chatListener.js"></script>
+</body>
+</html>

@@ -166,5 +166,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.applozic.phonegap": {
+        "source": {
+            "type": "registry",
+            "id": "https://github.com/AppLozic/Applozic-Cordova-Ionic-PhoneGap-Chat-Plugin.git"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

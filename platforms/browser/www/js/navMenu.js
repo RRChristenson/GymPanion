@@ -57,9 +57,9 @@ document.write('\
   <div class="bar-home-icon bottom"></div>\
 </div>\
 </div>\
-<div class="w-nav-button navbar-button right" id="message-button" data-ix="hide-navbar-icons">\
-<div class=navbar-button-icon">\
-  <div class="icon ion-email"></div>\
+<div class="message-button navbar-button right" id="message-button" >\
+<div class=navbar-button-icon" data-load="1">\
+  <div class="icon ion-email" onclick="loadChat()"></div>\
 </div>\
 </div>\
 </nav>\
@@ -87,4 +87,10 @@ $.ajax({\
        }\
    });\
 </script>\
+<script type="text/javascript">\
+function loadChat(){\
+   window.location="messages.html";\
+}\
+</script>\
+<script src="js/pubnub.js"></script>\
 ');

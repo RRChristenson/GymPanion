@@ -24,21 +24,18 @@
           <a class="w-inline-block navbar-button" href="messages.html" data-load="1">
             <div class="navbar-button-icon icon ion-ios-arrow-thin-left"></div>
           </a>
-          <a class="w-inline-block navbar-button right" href="settings.html" data-load="1" data-ix="search-box">
-            <div class="navbar-button-icon smaller icon ion-ios-gear-outline"></div>
-          </a>
         </div>
       </div>
       <div class="body">
-        <ul class="list list-chats" id="messageList">
+        <ul data-role="listview" class="list list-chats" id="messageList">
         </ul>
       </div>
       <div class="input-chat-block">
         <div class="w-form">
-          <form class="w-clearfix" id="wf-form-Send" name="wf-form-Send" action="#">
+          <div class="w-clearfix">
             <input class="w-input input-chat" id="messageContent" type="text" placeholder="Your message" name="email" data-name="Email" required="required">
             <input class="w-button chat-button" type="submit" value="Send" id="sendMessageButton" data-wait="Please wait...">
-          </form>
+          </div>
         </div>
       </div>
     </div>

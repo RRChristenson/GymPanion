@@ -1,42 +1,40 @@
 $(document).ready(function () {
-  alert("inready");
-  alert(window.location.hash);
   if(window.location.hash) {
     hash = window.location.hash
-    var chan= hash.substr(9, hash.indexOf('&')-9);
-    var recip = window.location.hash.substring(hash.indexOf('&')+7,hash.length);
-    document.getElementById('chatTitle').innerHTML="Chat with "+recip;
-    //alert(recip);
-    //alert(chan);
+    localStorage.chan = hash.substr(9, hash.indexOf('&')-9);
+    localStorage.recip = window.location.hash.substring(hash.indexOf('&')+7,hash.length);
+    document.getElementById('chatTitle').innerHTML="Chat with "+localStorage.recip;
     // hash found
 } else {
     // No hash found
 }
-  /*if(localStorage.username < localStorage.currentChat)
-    {
-      var chan = localStorage.username+localStorage.currentChat;
-    }
-  else
-    {
-      var chan = localStorage.currentChat+localStorage.username;
-    }*/
   // Initialize the PubNub API connection.
-  var pubnub = PUBNUB.init({
-    subscribe_key: "pub-c-e09df898-921f-4220-b126-bc60ceacea5d",
-    publish_key: "sub-c-7e42c466-9270-11e7-9c6d-caf7ce3b933f",
-    ssl: true
-  });
- 
+  var pubnub = new PubNub({
+    subscribeKey: "sub-c-7e42c466-9270-11e7-9c6d-caf7ce3b933f",
+    publishKey: "pub-c-e09df898-921f-4220-b126-bc60ceacea5d",
+    ssl: true,
+    presenceTimeout: 130
+});
+  pubnub.addListener({   
+    message: function(m) {
+      handleMessage(m.message);
+    },
+    presence: function(p) {
+
+    },
+    status: function(s) {
+    }
+});
   // Grab references for all of our elements.
   var messageContent = $('#messageContent'),
       sendMessageButton = $('#sendMessageButton'),
       messageList = $('#messageList');
  
   // Handles all the messages coming in from pubnub.subscribe.
-  function handleMessage(message) {
+  function handleMessage(message, history) {
     if(message.username == localStorage.username)
       {
-        var messageEll = $("<li class='list-chat right' data-ix='list-item'>"
+        var messageEll = $("<li class='list-chat right'>"
         + "<div class='w-clearfix column-right chat right'>"
         +  "<div class='arrow-globe right'></div>"
         +  "<div class='chat-text right'>"+message.text+"</div>"
@@ -46,7 +44,8 @@ $(document).ready(function () {
     else if(message.username != localStorage.username)
       {
         var profilepicURL= getProPic(message.username);
-        var messageEll = $("<li class='w-clearfix list-chat' data-ix='list-item'>"
+        //alert(profilepicURL);
+        var messageEll = $("<li class='w-clearfix list-chat'>"
         + "<div class='column-left chat'>"
         + "<div class='image-message chat'><img src="+profilepicURL+">"
         + "</div>"
@@ -58,24 +57,50 @@ $(document).ready(function () {
         + "</li>");
       }
     messageList.append(messageEll);
-    //messageList.listview('refresh');
  
-    // Scroll to bottom of page
-    $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
+    if(history)
+      {
+        $('html, body').scrollTop( $(document).height() );
+      }
+    else{
+      $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
+    }
+
   };
  
   // Compose and send a message when the user clicks our send message button.
   sendMessageButton.click(function (event) {
+    //addChatToDB();
+    data = {
+      "channel":localStorage.chan,
+      "sender":localStorage.username,
+      "recipient":localStorage.recip
+    };
+    $.ajax({
+      type : "GET",
+      url : "http://gympanion.pythonanywhere.com/newChat",
+      dataType : 'json',
+      data: data,
+      success: function(){}
+    });
     var message = messageContent.val();
-
+    //alert("message sent to "+localStorage.chan);
     if (message != '') {
       pubnub.publish({
-        channel: chan,
+        channel: localStorage.chan,
         message: {
           username: localStorage.username,
           text: message,
-          channel:chan
+          channel:localStorage.chan
         }
+      }, 
+      function (status, response) {
+          if (status.error) {
+              // handle error
+              //alert("error"+status.error);
+          } else {
+            //alert("message Published w/ timetoken");
+          }
       });
  
       messageContent.val("");
@@ -91,21 +116,19 @@ $(document).ready(function () {
  
   // Subscribe to messages coming in from the channel.
   pubnub.subscribe({
-    channels: chan
+    channels: [localStorage.chan]
   });
-
   pubnub.history({
-    channel: chan,
-    limit: 100
-  }, function (messages) {
-    messages = messages[0];
-    messages = messages || [];
-  
-    for(var i = 0; i < messages.length; i++) {
-      handleMessage(messages[i], false);
+    channel: localStorage.chan,
+    reverse: false,
+    count: 5
+  }, function (response,messages) {
+    console.dir(messages.messages);
+    message = messages.messages[0];
+    message = messages.messages || [];
+    for(var i = 0; i < message.length; i++) {
+      handleMessage(message[i].entry, true, false);
     }
-  
-    //$(document).scrollTop($(document).height());
   });
 });
 
@@ -120,13 +143,27 @@ function getProPic(user){
     data: data,
     success: function(response){
     for (var key in response){
-      var attrName = key;
-      var attrValue = response[key];
-      return attrValue;
+      localStorage.profilepic = response.profilePic;
     }
   },
   error : function() {
     navigator.notification.alert("error getting profile picture for navigation menu");
   }
   });
+
+  function addChatToDB(){
+    data = {
+      "channel":localStorage.chan,
+      "sender":localStorage.username,
+      "recipient":localStorage.recip
+    };
+    $.ajax({
+      type : "GET",
+      url : "http://gympanion.pythonanywhere.com/newChat",
+      dataType : 'json',
+      data: data,
+      success: function(){}
+    });
+  }
+  return localStorage.profilepic;
 }

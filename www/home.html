@@ -78,29 +78,6 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
-  <script type="text/javascript"> $.ajax({
-    
-           type : "GET",
-           url : "http://gympanion.pythonanywhere.com/getRecentFormChecks",
-           dataType : 'json',
-           success: function(response){
-            let debug = document.getElementById("debug");
-            var i = 1;
-                for (var key in response){
-                    let div = document.getElementById("f"+i+"bg");
-                    var attrName = key;
-                    var attrValue = response[key];
-                    div.style.backgroundImage = "url('"+attrValue+"')";
-                    let text = document.getElementById("f"+i);
-                    text.innerHTML += key;
-                    i++;
-                }
-           },
-           error : function(xhr, ppp,rrr) {
-               alert(xhr+"Errr is occured"+ppp+rrr);
-           }
-       });
-  </script>
   <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

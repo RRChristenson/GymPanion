@@ -1,4 +1,25 @@
 $(document).ready(function () {
+
+    function getProPic(user){
+        
+        data = {
+          "username":user
+        };
+        $.ajax({
+          type : "GET",
+          url : "http://gympanion.pythonanywhere.com/getProPic",
+          dataType : 'json',
+          data: data,
+          success: function(response){
+              localStorage.picURL = response.profilePic;
+        },
+        error : function() {
+          navigator.notification.alert("error getting profile picture chat");
+        }
+        });
+        return localStorage.picURL;
+      }
+
     if(localStorage.username < localStorage.currentChat)
       {
         var chan = localStorage.username+localStorage.currentChat;
@@ -20,11 +41,11 @@ $(document).ready(function () {
         messageList = $('#messageList');
    
     // Handles all the messages coming in from pubnub.subscribe.
-    function handleMessage(message) {
+    function handleMessage(message, recipient) {
         //get channel name based on usernames
-        alert(message.text)
+        //alert(message.text)
         var channelID=message.channel;
-        alert(message.channel)
+        //alert(message.channel)
         /*if(localStorage.username < message.username)
             {
                 var channelID = localStorage.username+message.username;
@@ -39,15 +60,16 @@ $(document).ready(function () {
             currChatDiv.innerHTML = message.text;
         }
         else{
-            var profilepicURL= getProPic(message.username);
+            var profilepicURL= getProPic(recipient);
+            //alert(profilepicURL);
             var newMessage = $("<li class='list-message' >"
-            + "<a class='w-clearfix w-inline-block' href='chat.html#channel="+channelID+"&recip="+message.username+"; data-load='1' data-recip="+message.username+"data-channel="+channelID+">"
+            + "<a class='w-clearfix w-inline-block' href='chat.html#channel="+channelID+"&recip="+recipient+"'>"
             + "<div class='w-clearfix column-left'>"
             + "<div class='image-message'><img src="+profilepicURL+">"
             + "</div>"
             + "</div>"
             + "<div class='column-right'>"
-            + "<div class='message-title'>"+message.username+"</div>"
+            + "<div class='message-title'>"+recipient+"</div>"
             + "<div class='message-text' id="+channelID+">"+message.text+"</div>"
             + "</div>"
             + "</a>"
@@ -58,12 +80,12 @@ $(document).ready(function () {
       
     };
 
-    pubnub.publish({
-        channel: "admintest",
+    /*pubnub.publish({
+        channel: "admintesting5",
         message: {
           username: localStorage.username,
           text: "message",
-          channel: "admintest"
+          channel: "admintesting5"
         }
       }, 
       function (status, response) {
@@ -71,35 +93,11 @@ $(document).ready(function () {
               // handle error
               alert(status);
           } else {
-              alert("message Published w/ timetoken", response.timetoken);
+              alert("message Published w/ timetoken to admintesting5");
           }
-      });
+      });*/
 
     checkChatDatabase();
-    
-
-  
-  function getProPic(user){
-    data = {
-      "username":user
-    };
-    $.ajax({
-      type : "GET",
-      url : "http://gympanion.pythonanywhere.com/getProPic",
-      dataType : 'json',
-      data: data,
-      success: function(response){
-      for (var key in response){
-        var attrName = key;
-        var attrValue = response[key];
-        return attrValue;
-      }
-    },
-    error : function() {
-      navigator.notification.alert("error getting profile picture chat");
-    }
-    });
-  }
   
   function checkChatDatabase(){
     data = {
@@ -111,11 +109,13 @@ $(document).ready(function () {
       dataType : 'json',
       data: data,
       success: function(response){
-      //for (var channel in response){
-      //  var channelName = response[channel];
-       // subscribe(channelName);
-     // }
-     subscribe(response);
+      for (var channel in response){
+        var channelName = response[channel];
+        //alert(channelName.channelID);
+        //localStorage.currRecip=channelName.recipient;
+        subscribe(channelName);
+        }
+     //subscribe(response);
     },
     error : function() {
       navigator.notification.alert("error getting profile picture for navigation menu");
@@ -125,21 +125,23 @@ $(document).ready(function () {
 
   function subscribe(channel){
     // Subscribe to messages coming in from the channel.
-    alert("subscribed to:"+channel)
+    //alert("subscribed to:"+channel.channelID)
     pubnub.subscribe({
-        channels: channel,
+        channels: channel.channelID,
         //message: handleMessage
       });
 
     pubnub.history({
-       channel: channel,
+       channel: channel.channelID,
        limit: 1
      }, function (messages) {
        messages = messages[0];
        messages = messages || [];
       
        for(var i = 0; i < messages.length; i++) {
-         handleMessage(messages[i], false);
+         //alert(messages[i]);
+         handleMessage(messages[i], channel.recipient, false);
+
        }
       
        //$(document).scrollTop($(document).height());

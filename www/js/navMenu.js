@@ -1,4 +1,5 @@
 document.write('\
+<script type="text/javascript" src="js/jquery.min.js"></script>\
 <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1">\
 <p class="navbar-title-test">GymPanion</p>\
 <div class="w-container">\
@@ -76,12 +77,8 @@ $.ajax({\
        dataType : \'json\',\
        data: data,\
        success: function(response){\
-            for (var key in response){\
-                var attrName = key;\
-                var attrValue = response[key];\
-                $("#menuProPic").attr("src", attrValue);\
-            }\
-       },\
+        $("#menuProPic").attr("src", response.profilePic);\
+  },\
        error : function() {\
            navigator.notification.alert("error getting profile picture for navigation menu");\
        }\

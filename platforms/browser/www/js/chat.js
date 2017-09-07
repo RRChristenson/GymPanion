@@ -1,4 +1,40 @@
 $(document).ready(function () {
+  function addChatToDB(){
+    data = {
+      "channel":localStorage.chan,
+      "sender":localStorage.username,
+      "recipient":localStorage.recip
+    };
+    $.ajax({
+      type : "GET",
+      url : "http://gympanion.pythonanywhere.com/newChat",
+      dataType : 'json',
+      data: data,
+      success: function(){}
+    });
+  }
+
+  /*function publishLatestTimetoken(channel,user,timetoken){
+    
+    data = {
+      "channel":channel,
+      "user":user,
+      "timetoken":timetoken
+    };
+    $.ajax({
+      type : "GET",
+      url : "http://192.168.1.3:5000/publishTimeToken",
+      dataType : 'json',
+      data: data,
+      success: function(response){
+          
+    },
+    error : function() {
+      //navigator.notification.alert("error getting profile picture chat");
+    }
+    });
+  }*/
+
   if(window.location.hash) {
     hash = window.location.hash
     localStorage.chan = hash.substr(9, hash.indexOf('&')-9);
@@ -17,6 +53,9 @@ $(document).ready(function () {
 });
   pubnub.addListener({   
     message: function(m) {
+      localStorage.latestTimeToken = m.timetoken;
+      localStorage.setItem(m.message.channel,m.timetoken);
+      //publishLatestTimetoken(localStorage.chan,localStorage.username,m.timetoken)
       handleMessage(m.message);
     },
     presence: function(p) {
@@ -70,7 +109,7 @@ $(document).ready(function () {
  
   // Compose and send a message when the user clicks our send message button.
   sendMessageButton.click(function (event) {
-    //addChatToDB();
+    addChatToDB();
     data = {
       "channel":localStorage.chan,
       "sender":localStorage.username,
@@ -128,6 +167,8 @@ $(document).ready(function () {
     message = messages.messages || [];
     for(var i = 0; i < message.length; i++) {
       handleMessage(message[i].entry, true, false);
+      localStorage.setItem(message[i].entry.channel,message[i].timetoken);
+      localStorage.latestTimeToken = message[i].timetoken;
     }
   });
 });
@@ -142,28 +183,11 @@ function getProPic(user){
     dataType : 'json',
     data: data,
     success: function(response){
-    for (var key in response){
       localStorage.profilepic = response.profilePic;
-    }
   },
   error : function() {
     navigator.notification.alert("error getting profile picture for navigation menu");
   }
   });
-
-  function addChatToDB(){
-    data = {
-      "channel":localStorage.chan,
-      "sender":localStorage.username,
-      "recipient":localStorage.recip
-    };
-    $.ajax({
-      type : "GET",
-      url : "http://gympanion.pythonanywhere.com/newChat",
-      dataType : 'json',
-      data: data,
-      success: function(){}
-    });
-  }
   return localStorage.profilepic;
 }

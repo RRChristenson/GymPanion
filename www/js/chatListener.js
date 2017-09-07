@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+  document.getElementById("message-button").style.display="none";
     function getProPic(user){
         
         data = {
@@ -29,11 +30,34 @@ $(document).ready(function () {
         var chan = localStorage.currentChat+localStorage.username;
       }
     // Initialize the PubNub API connection.
-    pubnub = PUBNUB.init({
+    /*pubnub = PUBNUB.init({
       subscribe_key: "sub-c-7e42c466-9270-11e7-9c6d-caf7ce3b933f",
       publish_key: "pub-c-e09df898-921f-4220-b126-bc60ceacea5d",
       ssl: true
-    });
+    });*/
+    var pubnub = new PubNub({
+      subscribeKey: "sub-c-7e42c466-9270-11e7-9c6d-caf7ce3b933f",
+      publishKey: "pub-c-e09df898-921f-4220-b126-bc60ceacea5d",
+      ssl: true,
+      presenceTimeout: 130
+  });
+    pubnub.addListener({   
+      message: function(m) {
+        handleMessage(m.message);
+        console.dir(m);
+        console.dir(localStorage);
+        if(m.timetoken > localStorage.getItem(m.message.channel))
+          {
+            var channelID=m.message.channel;
+            document.getElementById(channelID).innerHTML += "<div class=\"nav-menu-text-right\">  </div>";
+          }
+      },
+      presence: function(p) {
+  
+      },
+      status: function(s) {
+      }
+  });
    
     // Grab references for all of our elements.
     var messageContent = $('#messageContent'),
@@ -127,24 +151,26 @@ $(document).ready(function () {
     // Subscribe to messages coming in from the channel.
     //alert("subscribed to:"+channel.channelID)
     pubnub.subscribe({
-        channels: channel.channelID,
-        //message: handleMessage
-      });
-
+      channels: [channel.channelID]
+    });
     pubnub.history({
-       channel: channel.channelID,
-       limit: 1
-     }, function (messages) {
-       messages = messages[0];
-       messages = messages || [];
-      
-       for(var i = 0; i < messages.length; i++) {
-         //alert(messages[i]);
-         handleMessage(messages[i], channel.recipient, false);
-
-       }
-      
-       //$(document).scrollTop($(document).height());
-     });
+      channel: channel.channelID,
+      reverse: false,
+      count: 1
+    }, function (response,messages) {
+      //console.dir(messages.messages);
+      message = messages.messages[0];
+      message = messages.messages || [];
+      for(var i = 0; i < message.length; i++) {
+        handleMessage(message[i].entry, channel.recipient, false);
+        var latestTokenForCurrChat = localStorage.getItem(channel.channelID);
+        console.dir(message[i]);
+        if(message[i].timetoken > latestTokenForCurrChat)
+          {
+            var channelID=message[i].entry.channel;
+            document.getElementById(channelID).innerHTML += "<div class=\"nav-menu-text-right\">  </div>";
+          }
+      }
+    });
   }
 });

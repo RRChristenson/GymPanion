@@ -1,5 +1,6 @@
 document.write('\
 <script type="text/javascript" src="js/jquery.min.js"></script>\
+<script type="text/javascript" src="js/backgroundChat.js"></script>\
 <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1">\
 <p class="navbar-title-test">GymPanion</p>\
 <div class="w-container">\
@@ -60,7 +61,7 @@ document.write('\
 </div>\
 <div class="message-button navbar-button right" id="message-button" >\
 <div class=navbar-button-icon" data-load="1">\
-  <div class="icon ion-email" onclick="loadChat()"></div>\
+  <div class="icon ion-email" id="emailIcon" onclick="loadChat()"></div>\
 </div>\
 </div>\
 </nav>\

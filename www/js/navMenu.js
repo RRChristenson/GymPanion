@@ -17,7 +17,7 @@ document.write('\
       </div>\
       <div class="nav-menu-titles">Home Page</div>\
     </a>\
-    <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html" data-load="1">\
+    <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html#'+localStorage.username+'&" data-load="1">\
     <div class="icon-list-menu">\
       <div class="icon ion-ios-contact-outline"></div>\
     </div>\

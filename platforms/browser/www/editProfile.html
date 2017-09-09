@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+      <script src="js/navMenu.js"></script>
+      <div class="body padding">
+        <div class="w-form">
+          <form id="profile-form" name="profile-form" class="profile-form" action="#">
+            <div class="separator-button-input"></div>
+            <div>
+              <label class="label-form-edit-profile" for="favorite-lift">Favorite Lift</label>
+              <input class="w-input input-form" id="fav-lift-field" type="fav-lift" name="fav-lift" data-name="fav-lift" required="required">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form-edit-profile" for="years-field">Years Lifting</label>
+              <input class="w-input input-form" id="years-field" type="number" min="0" step="1" name="yearsLifting" data-name="years" required="required">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+                <label class="label-form-edit-profile" for="insta">Instagram Handle</label>
+                <input class="w-input input-form" id="insta" type="insta" name="insta" data-name="insta">
+                <div class="separator-fields"></div>
+            </div>
+            <div>
+                <label class="label-form-edit-profile" for="youtube">Youtube Channel</label>
+                <input class="w-input input-form" id="youtube" type="youtube" name="youtube" data-name="youtube">
+                <div class="separator-fields"></div>
+            </div>
+           <div>
+              <label class="label-form-edit-profile" for="bio">Bio</label>
+              <textarea class="w-input input-form textarea" id="bio" name="bio" data-name="bio"></textarea>
+            </div> 
+            <div class="separator-button-input"></div>
+            <input class="w-button action-button" type="submit" value="Send" data-wait="Please wait...">
+          </form>
+          <div class="w-form-done">
+            <p>Profile information Updated</p>
+          </div>
+          <div class="w-form-fail">
+            <p>Oops! Something went wrong, try again later.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-content loading-mask" id="new-stack">
+      <div class="loading-icon">
+        <div class="navbar-button-icon icon ion-load-d"></div>
+      </div>
+    </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <script>
+    $.ajax({
+        
+               type : "GET",
+               url : "http://gympanion.pythonanywhere.com/getProfileData",
+               headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+               contentType:'application/json; charset=utf-8',
+               dataType : 'json',
+               data: data,
+               success: function(response){   
+                if(response != "Profile Not Found"){
+                  document.getElementById("fav-lift-field").value=response.favoriteLift;
+                  document.getElementById("bio").innerHTML=response.bio;
+                  document.getElementById("youtube").innerHTML=response.youtube;
+                  document.getElementById("insta").innerHTML=response.instagram;
+                  document.getElementById("years-field").value=response.yearsLifting;
+                }
+               },
+               error : function() {
+                   navigator.notification.alert("Invalid Username or Password");
+               }
+           });
+           </script>
+  <script>
+      $('#profile-form').submit(function () {
+      var favlift = document.getElementById("fav-lift-field").value;//$("#fav-lift").val();
+      var yearsLifting = document.getElementById("years-field").value;//$("yearsLifting").val();
+      var insta = document.getElementById("insta").value;//$("insta").val();
+      if(insta === undefined)
+      {insta = "";}
+      var youtube = document.getElementById("youtube").value;//$("youtube").val();
+      if(youtube === undefined)
+      {youtube = ""};
+      var bio = document.getElementById("bio").value;//$("bio").val();
+      if(bio === undefined){
+        bio == "";
+      //alert(favlift+yearsLifting+insta+youtube+bio);
+      }
+      data = {
+                      "username":localStorage.username,
+                      "favoriteLift":favlift,
+                      "yearsLifting":yearsLifting,
+                      "instagram":insta,
+                      "youtube":youtube,
+                      "bio":bio
+                     };
+      $.ajax({
+        
+               type : "GET",
+               url : "http://gympanion.pythonanywhere.com/updateProfileData",
+               headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+               contentType:'application/json; charset=utf-8',
+               dataType : 'json',
+               data: data,
+               success: function(response){   
+       
+               },
+               error : function() {
+                   navigator.notification.alert("Invalid Username or Password");
+               }
+           });
+      return false;
+    });
+    </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

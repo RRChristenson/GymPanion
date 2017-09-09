@@ -86,8 +86,10 @@ $(document).ready(function () {
         //alert(profilepicURL);
         var messageEll = $("<li class='w-clearfix list-chat'>"
         + "<div class='column-left chat'>"
+        + "<a href='profile.html#"+message.username+"&'>"
         + "<div class='image-message chat'><img src="+profilepicURL+">"
         + "</div>"
+        + "</a>"
         + "</div>"
         + "<div class='w-clearfix column-right chat'>"
         + "<div class='arrow-globe'></div>"

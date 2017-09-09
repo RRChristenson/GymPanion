@@ -624,6 +624,14 @@ a {
   line-height: 11px;
   letter-spacing: 1px;
 }
+.label-form-edit-profile {
+  font-family: 'Shadows Into Light';
+  margin-bottom: 0px;
+  color: rgba(35, 34, 34, 0.80);
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 1px;
+}
 .label-form.middle {
   display: inline-block;
   float: left;
@@ -1058,6 +1066,9 @@ a {
 .bottomOfFinder{
   width:100wh;
   background-color:#402244;
+}
+.sendMessage{
+  color: white!important;
 }
 .news-container.item-new {
   width:100%;

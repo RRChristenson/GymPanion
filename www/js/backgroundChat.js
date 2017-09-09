@@ -96,7 +96,6 @@ function checkChatDatabase(){
 
 function subscribe(channel){
   // Subscribe to messages coming in from the channel.
-  //alert("subscribed to:"+channel.channelID)
   pubnub.subscribe({
     channels: [channel.channelID]
   });
@@ -105,16 +104,13 @@ function subscribe(channel){
     reverse: false,
     count: 1
   }, function (response,messages) {
-    //console.dir(messages.messages);
     message = messages.messages[0];
     message = messages.messages || [];
     for(var i = 0; i < message.length; i++) {
       //handleMessage(message[i].entry, channel.recipient, false);
       var latestTokenForCurrChat = localStorage.latestTimeToken;
-      //console.dir(message[i]);
       if(message[i].timetoken > latestTokenForCurrChat)
         {
-            //console.dir(localStorage.newMessage)
             var div = document.getElementById("emailIcon");
             if(div.classList.contains('ion-email')){
                 document.getElementById("emailIcon").classList.remove('ion-email');

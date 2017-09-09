@@ -610,6 +610,14 @@ module.exports = [
         "clobbers": [
             "applozic"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-image-picker/www/imagepicker.js",
+        "id": "cordova-plugin-image-picker.ImagePicker",
+        "pluginId": "cordova-plugin-image-picker",
+        "clobbers": [
+            "plugins.imagePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -636,7 +644,8 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-vibration": "2.1.5",
     "cordova-plugin-whitelist": "1.2.2",
-    "com.applozic.phonegap": "0.8.0"
+    "com.applozic.phonegap": "0.8.0",
+    "cordova-plugin-image-picker": "1.1.1"
 }
 // BOTTOM OF METADATA
 });

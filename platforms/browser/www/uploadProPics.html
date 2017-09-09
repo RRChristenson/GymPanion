@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+  localStorage.uploadpic = -1;
+  localStorage.profileURL1="none";
+  localStorage.profileURL2="none";
+  localStorage.profileURL3="none";
+  localStorage.profileURL4="none";
+  </script>
+  <meta charset="utf-8">
+  <title>Upload Profile Pictures</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/Check.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" charset="utf-8">
+    var pictureSource; 
+    var destinationType; 
+    document.addEventListener("deviceready",onDeviceReady,false);
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+        mediaType: Camera.MediaType.ALLMEDIA;
+    }
+    function onPhotoURISuccess(imageURI) {
+
+      var image = document.getElementById('img'+localStorage.uploadpic);
+      localStorage.setItem("profileURL"+localStorage.uploadpic,imageURI);
+      image.style.backgroundImage="url("+imageURI+")";
+    }
+    function uploadAllPhotos() {
+      for(i = 1; i < 5; i++){
+        if(localStorage.getItem("profileURL"+i) != "none"){
+          localStorage.uploadpic = i;
+          alert(localStorage.getItem("profileURL"+i));
+          sendImage(localStorage.getItem("profileURL"+i));
+        }
+      }
+    }
+    function sendImage(imageURI){
+      alert("sending");
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = localStorage.username+localStorage.uploadpic+".jpeg";
+        options.mimeType = "image/jpeg";
+        console.log(options.fileName);
+        var params = new Object();
+        params.username = localStorage.username;
+        params.profilePic = localStorage.uploadpic;
+        options.params = params;
+        options.chunkedMode = false;
+       
+       var ft = new FileTransfer();
+        ft.upload(imageURI, "http://gympanion.pythonanywhere.com/uploadProfile", function(result){
+        console.log(JSON.stringify(result));
+        }, function(error){
+        console.log(JSON.stringify(error));
+        }, options);
+    }
+    function getPhoto(source) {
+      alert("trying"+localStorage.uploadpic);
+      if(localStorage.uploadpic >= 1 && localStorage.uploadpic <= 4)
+      {
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+        destinationType: destinationType.FILE_URI,
+        correctOrientation: true,
+        sourceType: source });
+      }
+    }
+    function onFail(message) {
+      //alert('Failed because: ' + message);
+    }
+    </script>
+</head>
+<body>
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+      <script src="js/navMenu.js"></script>
+      <div class="body">
+          <div class="homeboxFormCheck"> 
+              <div class="homeformshade">
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+              <p class="description-new larger" id="debug" style="color:white">Select an open slot and press the button to select up to 4 profile pictures</p>
+              <div class="separator-fields"></div>
+              </div>
+            </div>
+        <div class="w-form padding">
+            <div class="separator-button-input"></div>
+            <input class="w-button action-button" onclick="getPhoto(pictureSource.PHOTOLIBRARY);" style="background-color:#402244" id="uploadPics" type="submit" value="Select Pictures" data-wait="Please wait...">
+            
+        </div>
+        <div class="w-clearfix portfolio-gallery">
+            <a class="w-lightbox w-inline-block portfolio-item" >
+              <div class="portfolio-image" id="img1"></div>
+            </a>
+            <a class="w-lightbox w-inline-block portfolio-item" >
+              <div class="portfolio-image" id="img2" ></div>
+            </a>
+            <a class="w-lightbox w-inline-block portfolio-item" >
+              <div class="portfolio-image" id="img3"></div>
+            </a>
+            <a class="w-lightbox w-inline-block portfolio-item" >
+              <div class="portfolio-image" id="img4"></div>
+            </a>
+          </div>
+          <div class="w-form padding">
+              <div class="separator-button-input"></div>
+              <input class="w-button action-button" onclick="uploadAllPhotos()" style="background-color:#402244" id="uploadallPics" type="submit" value="Update profile pictures" data-wait="Please wait...">
+              
+          </div>
+      </div>
+    </div>
+    <div class="page-content loading-mask" id="new-stack">
+      <div class="loading-icon">
+        <div class="navbar-button-icon icon ion-load-d"></div>
+      </div>
+    </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <script>
+    document.getElementById("img1").addEventListener("click", function() {
+      document.getElementById("img1").style.boxShadow="inset 0 0 0 4px #402244";
+      document.getElementById("img2").style.boxShadow="";
+      document.getElementById("img3").style.boxShadow="";
+      document.getElementById("img4").style.boxShadow="";
+      localStorage.uploadpic = 1;
+    })
+    document.getElementById("img2").addEventListener("click", function() {
+      document.getElementById("img2").style.boxShadow="inset 0 0 0 4px #402244";
+      document.getElementById("img3").style.boxShadow="";
+      document.getElementById("img1").style.boxShadow="";
+      document.getElementById("img4").style.boxShadow="";
+      localStorage.uploadpic = 2;
+    })
+    document.getElementById("img3").addEventListener("click", function() {
+      document.getElementById("img3").style.boxShadow="inset 0 0 0 4px #402244";
+      document.getElementById("img4").style.boxShadow="";
+      document.getElementById("img1").style.boxShadow="";
+      document.getElementById("img2").style.boxShadow="";
+      localStorage.uploadpic = 3;
+    })
+    document.getElementById("img4").addEventListener("click", function() {
+      document.getElementById("img4").style.boxShadow="inset 0 0 0 4px #402244";
+      document.getElementById("img3").style.boxShadow="";
+      document.getElementById("img2").style.boxShadow="";
+      document.getElementById("img1").style.boxShadow="";
+      localStorage.uploadpic = 4;
+    })
+    </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

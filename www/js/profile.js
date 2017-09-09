@@ -1,6 +1,21 @@
 if(window.location.hash) {
     hash = window.location.hash
     username = hash.substr(1, hash.indexOf('&')-1);
+    data = {
+        "username":username
+       };
+    $.ajax({
+        type : "GET",
+        url : "http://gympanion.pythonanywhere.com/getProPic",
+    dataType : 'json',
+    data: data,
+    success: function(response){
+    $("#mainProPic").attr("src", response.profilePic);
+    },
+    error : function() {
+    navigator.notification.alert("error getting profile picture for navigation menu");
+    }
+    });
     //localStorage.recip = window.location.hash.substring(hash.indexOf('&')+7,hash.length);
     document.getElementById("name").innerHTML=username;
     data = {
@@ -32,6 +47,7 @@ if(window.location.hash) {
                    navigator.notification.alert("Invalid Username or Password");
                }
            });
+    
     
     if(localStorage.username < username)
         {

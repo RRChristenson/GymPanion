@@ -174,5 +174,15 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-image-picker": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-image-picker"
+        },
+        "is_top_level": true,
+        "variables": {
+            "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Provide pictures for your profile"
+        }
     }
 }

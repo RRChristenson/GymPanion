@@ -215,6 +215,10 @@ a {
   height: 270px;
 
 }
+.w-slider.spotterSearch-slider{
+  height: 180px;
+
+}
 .n-p-l{
   padding-left: 0px !important;
 }
@@ -442,6 +446,18 @@ a {
   text-transform: uppercase;
   font-size: 30px;
   font-weight: 800;
+  line-height: 1;
+  /*text-shadow: #EDEDED 3px 2px 0;*/
+  position: relative;
+}
+.headerNearbyLifters {
+  font-family: 'Shadows Into Light';
+  /*color: #555;*/
+  color:#9862b6;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
   line-height: 1;
   /*text-shadow: #EDEDED 3px 2px 0;*/
   position: relative;

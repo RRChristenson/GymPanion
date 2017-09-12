@@ -392,10 +392,10 @@ h5.pro-link {
     border-bottom: 2px solid #D0D0D0;
 }
 .details-left img {
-    border-radius: 50%;
+    /*border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    -o-border-radius: 50%;
+    -o-border-radius: 50%;*/
 }
 .details-grid {
     background: url(../img/formbg.png) no-repeat 0px 0px;
@@ -1305,11 +1305,11 @@ input[type="file"] {
 	}
 	.details-left {
 		float: left;
-		width: 41%;
+		width: 50%;
 	}
 	.details-right {
 		float: left;
-		width: 58%;
+		width: 49%;
 	}
 	.quality figcaption p {
 		padding: 7px 11px;
@@ -1466,11 +1466,11 @@ input[type="file"] {
 	}
 	.details-left {
 		float: left;
-		width: 36%;
+		width: 48%;
 	}
 	.details-right {
 		float: left;
-		width: 64%;
+		width: 52%;
 		padding-left: 0;
 	}
 	.follow-left h3 {

@@ -7,7 +7,7 @@ document.write('\
 <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">\
     <div class="nav-menu-header">\
     <div class="profile-menu">\
-    <img class="img-circle border-effect" id="menuProPic" src="images/pic3.jpeg" alt=" ">\
+    <img class="border-effect" id="menuProPic" src="images/pic3.jpeg" alt=" ">\
       <h3 id="username">Rob Christenson</h3>\
       </div>\
     </div>\

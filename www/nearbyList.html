@@ -39,27 +39,8 @@
               <div class="separator-button"></div>
           </div>
           <div class="w-slider spotterSearch-slider" data-animation="slide" data-duration="500" data-infinite="1" data-nav-spacing="5" data-delay="4000" data-autoplay="1">
-              <div class="w-slider-mask">
-                <div class="w-slide" id="f1bg">
-                    <div class="details-grid">
-                        <div class="details-shade">
-                            <div class="col-md-6 details-left">
-                              <a id="profilePicture">
-                              <img class="img-circle border-effect" id="mainProPic" src="http://gympanion.pythonanywhere.com/static/defaultProfilePic.png" alt=" " /><!--img-circle-->
-                              <div class ="sendMessage"><a id="sendMessage" href="profile.html"><p style="
-                                color: white">View Full Profile</p></a></div>
-                              </a>
-                            </div>
-                            <div class="col-md-6 details-right" style="padding-left: 20px;">
-                              <h3 id="name">User Name</h3>
-                              <h4 id="bio" class="flipCard">No bio</h4>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        
-                        </div>
-                      </div>
-                  </div>
+              <div class="w-slider-mask" id="slidermask">
+                
               </div>
               <div class="w-slider-arrow-left arrow-icon">
                 <div class="w-icon-slider-left"></div>
@@ -99,9 +80,31 @@
         for (var user in response){
         var username = response[user].username;
         alert(username)
+        getProfile(username);
         }
       }
     });
+
+    function getProfile(user){
+      var profile = $("<div class='w-slide' id='f1bg'>"
+        +"<div class='details-grid'>"
+        +"<div class='details-shade' style='height: 275px;'>"
+        +"<div class='col-md-6 details-left'>"
+        +"<a id='profilePicture'>"
+        +"<img class='border-effect' id='mainProPic' src='http://gympanion.pythonanywhere.com/static/defaultProfilePic.png' alt=' '/>"
+        +"<div class ='sendMessage'><a id='sendMessage' href='profile.html'><p style='color: white'>View Full Profile</p></a></div>"
+        +"</a>"
+        +"</div>"
+        +"<div class='col-md-6 details-right' style='padding-left: 20px;'>"
+        +"<h3 id='name'>"+user+"</h3>"
+        +"<h4 id='bio' class='flipCard'>No bio</h4>"
+        +"<div class='clearfix'></div>"
+        +"</div>"
+        +"<div class='clearfix'></div>"
+        +"</div>"
+        +"</div>");
+    $('#slidermask').append(profile);
+    }
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>

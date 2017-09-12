@@ -10,6 +10,27 @@
   <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
   <link rel="apple-touch-icon" href="img/logo.ico">
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script>
+      function sendRequest(data){
+        $.ajax({
+          type : "GET",
+          url : "http://gympanion.pythonanywhere.com/publishSpotterSearch",
+          dataType : 'json',
+          data: data,
+          success: function(response){
+            window.location="nearbyList.html";
+            },
+          error : function() {
+            //alert("error sending your location to the server, try again later");
+            navigator.notification.alert("Error finding a nearby spotter, try again later");
+            }
+        });
+      }
+
+      function onError(err){
+        navigator.notification.alert("Oops! There was an error getting your location, try again later");
+      }
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
 </head>
@@ -30,7 +51,7 @@
             <div class="separator-fields"></div>
             <div class="separator-fields"></div>
             <div class="w-form" style="padding-left:15px; padding-right:15px">
-              <form id="search-form" name="search-form" class="search-form" action="#">
+              <form id="search-form" name="search-form" class="search-form" action="#" data-redirect="nearbyList.html">
                 <div class="separator-button-input"></div>
                 <div>
                   <label class="label-form" for="field" style="color:black">Radius (Miles)</label>
@@ -78,6 +99,19 @@
   </script>
   <script>
     $('#search-form').submit(function(){
+      function onSuccess(pos){
+        var crd = pos.coords;
+        localStorage.lat = crd.latitude;
+        localStorage.long = crd.longitude;
+        data = {
+        "username":localStorage.username,
+        "radius":radius,
+        "gender":gender,
+        "latitude":localStorage.lat,
+        "longitude":localStorage.long
+      };
+      sendRequest(data);
+      }
       var gender = "male";
       if (document.getElementById('female').checked) {
         gender = "female";
@@ -85,46 +119,14 @@
       else if(document.getElementById('male').checked){
         gender = "male";
       }
-      alert(gender);
       var radius = document.getElementById("search-radius").value;
       var options = {
         enableHighAccuracy: true,
-        timeout: 5000,
+        timeout: 1000,
         maximumAge: 0
       };
-      navigator.geolocation.getCurrentPosition(onSuccess, error, options);
-      function onSuccess(pos) {
-      var crd = pos.coords;
-      var lat = crd.latitude;
-      var long = crd.longitude;
-      data = {
-        "username":localStorage.username,
-        "radius":radius,
-        "gender":gender,
-        "latitude":lat,
-        "longitude":long
-      };
-      $.ajax({
-        type : "GET",
-        url : "http://192.168.1.3:5000/publishSpotterSearch",
-      dataType : 'json',
-      data: data,
-      success: function(response){
-        window.location="nearbyList.html"
-      },
-      error : function() {
-      alert("error");
-      //navigator.notification.alert("Error finding a nearby spotter, try again later");
-      }
-      });
-      }
-    function error(err) {
-    alert("Error getting your location, try again later");
-  };
-
-
-
-
+      navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+      return false;
     });
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>

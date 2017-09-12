@@ -65,7 +65,7 @@
       }
     }
     function sendImage(imageURI){
-      alert("sending");
+      //alert("sending");
         var options = new FileUploadOptions();
         options.fileKey = "file";
         options.fileName = localStorage.username+localStorage.uploadpic+".jpeg";
@@ -80,12 +80,14 @@
        var ft = new FileTransfer();
         ft.upload(imageURI, "http://gympanion.pythonanywhere.com/uploadProfile", function(result){
         console.log(JSON.stringify(result));
+        winLoc = "profile.html#"+localStorage.username+"&";
+        window.location=winLoc;
         }, function(error){
         console.log(JSON.stringify(error));
         }, options);
     }
     function getPhoto(source) {
-      alert("trying"+localStorage.uploadpic);
+      //alert("trying"+localStorage.uploadpic);
       if(localStorage.uploadpic >= 1 && localStorage.uploadpic <= 4)
       {
         navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 

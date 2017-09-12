@@ -8,12 +8,15 @@ function onSuccess(pos) {
     var crd = pos.coords;
     var lat = crd.latitude;
     var long = crd.longitude;
+    localStorage.long = crd.longitude;
+    localStorage.lat = crd.latitude;
+}
     data = {
         "username":localStorage.username,
         "radius":localStorage.spotterRadius,
         "gender":localStorage.gender,
-        "latitude":lat,
-        "longitude":long
+        "latitude":localStorage.lat,
+        "longitude":localStorage.long
        };
     $.ajax({
         type : "GET",
@@ -26,7 +29,7 @@ function onSuccess(pos) {
     navigator.notification.alert("Error finding a nearby spotter");
     }
     });
-}
+
 function error(err) {
     navigator.notification.alert("Error getting your location, try again later");
   };

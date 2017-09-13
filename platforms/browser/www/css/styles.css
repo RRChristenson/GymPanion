@@ -103,7 +103,7 @@ a {
   height: 60px;
   padding-top: 15px;
   /*background-color: #9b63f8;*/
-  background-color: #b377d9;
+  background-color: #1f5687;
   /*background-image: -webkit-linear-gradient(107deg, #9b63f8, #809ffc 98%);
   background-image: linear-gradient(343deg, #9b63f8, #809ffc 98%);
   color: #000000;
@@ -422,7 +422,7 @@ a {
   line-height: 1;
 }
 .gymBox{
-  background-color:#402244;
+  background-color:#4d79a0;
   width: 100%;
   margin: 0 auto;
   margin-top: 15px;
@@ -439,9 +439,9 @@ a {
   background-color: #f07da8;
 }
 .logo {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Shadows Into Light';
   /*color: #555;*/
-  color:#9862b6;
+  color:#789CBC;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 30px;
@@ -585,7 +585,7 @@ a {
   width: 100%;
   height: 49px;
   padding: 12px;
-  background-color: #4C7EFD;
+  background-color: #4d79a0;
   color: white;
   font-size: 12px;
   line-height: 26px;
@@ -1082,7 +1082,7 @@ a {
 }
 .bottomOfFinder{
   width:100wh;
-  background-color:#402244;
+  background-color:#247C0C;
 }
 .sendMessage{
   color: white!important;
@@ -1461,7 +1461,7 @@ a {
   color: rgba(255, 255, 255, 0.66);
 }
 .bg-gradient {
-  background-color: #402244;
+  background-color: #91C4F2;
   /*background-image: -webkit-linear-gradient(107deg, #809ffc, #c1c3f3 98%);
   background-image: linear-gradient(343deg, #809ffc, #c1c3f3 98%);*/
 }
@@ -1838,7 +1838,7 @@ input[type=text]:focus, textarea:focus {
   font-size: 14px;
   text-align: center;
   color: white;
-  background-color: #402244;
+  background-color: #4d79a0;
 }
 .HomeHeader {
   font-family: 'Open Sans', sans-serif;
@@ -1943,10 +1943,10 @@ input[type=text]:focus, textarea:focus {
     font-size: 14px;
 }
 .border-effect {
-  border: 2px solid #B377D9;
+  border: 2px solid #1f5687;
   padding: 9px;
-  border-left: 2px solid #D0D0D0;
-  border-bottom: 2px solid #D0D0D0;
+  border-left: 2px solid #8bb3d6;
+  border-bottom: 2px solid #8bb3d6;
   background-position: center center;
 }
 

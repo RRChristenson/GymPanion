@@ -508,8 +508,8 @@ h5.pro-link {
 /*-- //follow --*/
 /*-- goals --*/
 .goals {
-    background:#402245;
-	border-bottom:1px solid #000;
+    background:#4d79a0;
+	/*border-bottom:1px solid #000;*/
 }
 .phn-status-bar2{
 padding:8px 0;
@@ -529,7 +529,7 @@ padding:8px 0;
     width: 100%;
 }
 .goal-info h4 {
-    color: #B377D9;
+    color: #91c4f2;
     font-size: 19px;
     margin: 6px 0 12px 0px;
     font-weight: 500;

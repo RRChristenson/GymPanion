@@ -129,6 +129,9 @@
                dataType : 'json',
                data: data,
                success: function(response){   
+                 navigator.notification.alert("Profile Updated");
+                 loc = "profile.html#"+localStorage.username+"&";
+                 window.location=loc;
        
                },
                error : function() {

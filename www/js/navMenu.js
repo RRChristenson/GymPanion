@@ -47,6 +47,12 @@ document.write('\
       </div>\
         <div class="nav-menu-titles">Coaching</div>\
     </a>\
+    <a class="w-clearfix w-inline-block nav-menu-link" href="logout.html" data-load="1">\
+    <div class="icon-list-menu">\
+      <div class="icon ion-ios-arrow-back"></div>\
+    </div>\
+      <div class="nav-menu-titles">Logout</div>\
+  </a>\
     <div class="separator-bottom"></div>\
     <div class="separator-bottom"></div>\
     <div class="separator-bottom"></div>\

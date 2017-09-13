@@ -405,8 +405,20 @@ h5.pro-link {
     -ms-background-size: cover;
     -o-background-size: cover;
 }
+.details-grid-nearby {
+	background: url(../img/formbg.png) no-repeat 0px 0px;
+    background-size: cover;
+	-webkit-background-size: cover;
+	 -moz-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+}
 .details-shade{
     padding: 75px 0 0;
+    background:rgba(22, 21, 23, 0.6);
+}
+.details-shade-nearby{
+    padding: 35px 0 0;
     background:rgba(22, 21, 23, 0.6);
 }
 .details-shade,.details-grid{

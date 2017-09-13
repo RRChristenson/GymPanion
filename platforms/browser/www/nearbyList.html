@@ -73,7 +73,7 @@
       };
       $.ajax({
         type : "GET",
-        url : "http://192.168.1.3:5000/getNearbySpotters",
+        url : "http://gympanion.pythonanywhere.com/getNearbySpotters",
       dataType : 'json',
       data: data,
       success: function(response){
@@ -87,8 +87,8 @@
 
     function getProfile(user){
       var profile = $("<div class='w-slide' id='f1bg'>"
-        +"<div class='details-grid'>"
-        +"<div class='details-shade' style='height: 275px;'>"
+        +"<div class='details-grid-nearby'>"
+        +"<div class='details-shade-nearby' style='height: 275px;'>"
         +"<div class='col-md-6 details-left'>"
         +"<a id='profilePicture'>"
         +"<img class='border-effect' id='mainProPic' src='http://gympanion.pythonanywhere.com/static/defaultProfilePic.png' alt=' '/>"

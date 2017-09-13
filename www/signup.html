@@ -93,15 +93,15 @@
                dataType : 'json',
                data: data,
                success: function(response){   
-                for (var key in response){
-                    var keyVal = key;
-                    var registered = response[keyVal];
-                    if (registered == 'true')
+                    if (response.Registered)
                     {
                       navigator.notification.alert("Registration complete, proceed to login");
                       window.location = "login.html";
                     }
-                }         
+                    if (response.error)
+                    {
+                      navigator.notification.alert(response.error);
+                    }        
                },
                error : function() {
                    navigator.notification.alert("Error registering");

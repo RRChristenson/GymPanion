@@ -407,12 +407,13 @@ h5.pro-link {
     -o-background-size: cover;
 }
 .details-grid-nearby {
-	background: url(../img/formbg.png) no-repeat 0px 0px;
+	background-color:#91c4f2;
+	/*background: url(../img/formbg.png) no-repeat 0px 0px;
     background-size: cover;
 	-webkit-background-size: cover;
 	 -moz-background-size: cover;
     -ms-background-size: cover;
-    -o-background-size: cover;
+    -o-background-size: cover;*/
 }
 .details-shade{
     padding: 75px 0 0;
@@ -420,7 +421,7 @@ h5.pro-link {
 }
 .details-shade-nearby{
     padding: 35px 0 0;
-    background:rgba(22, 21, 23, 0.6);
+    /*background:rgba(22, 21, 23, 0.6);*/
 }
 .details-shade,.details-grid{
     min-height:275px; 
@@ -430,12 +431,22 @@ h5.pro-link {
     font-size: 22px;
     margin: 12px 0 9px;
 }
+.details-right h3-nearby {
+    color: #1f5687;
+    font-size: 22px;
+    margin: 12px 0 9px;
+}
 .details-right {
     float: left;
     width: 62%;
 }
 .details-right h4 {
     color: #CCC;
+    font-size: 16px;
+    margin-bottom: 13px;
+}
+.details-right h4-nearby {
+    color: white;
     font-size: 16px;
     margin-bottom: 13px;
 }

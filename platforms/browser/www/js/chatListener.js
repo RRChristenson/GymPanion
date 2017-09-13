@@ -129,7 +129,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type : "GET",
-      url : "http://192.168.1.3:5000/checkChatDB",
+      url : "http://gympanion.pythonanywhere.com/checkChatDB",
       dataType : 'json',
       data: data,
       success: function(response){

@@ -7,7 +7,7 @@ document.write('\
 <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">\
     <div class="nav-menu-header">\
     <div class="profile-menu">\
-    <img class="border-effect" id="menuProPic" src="images/pic3.jpeg" alt=" ">\
+    <img class="img-circle" id="menuProPic" src="images/pic3.jpeg" alt=" ">\
       <h3 id="username">Rob Christenson</h3>\
       </div>\
     </div>\
@@ -15,7 +15,7 @@ document.write('\
       <div class="icon-list-menu">\
         <div class="icon ion-home"></div>\
       </div>\
-      <div class="nav-menu-titles">Home Page</div>\
+      <div class="nav-menu-titles">Home</div>\
     </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html#'+localStorage.username+'&" data-load="1">\
     <div class="icon-list-menu">\

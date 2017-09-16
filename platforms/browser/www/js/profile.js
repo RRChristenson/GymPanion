@@ -51,7 +51,6 @@ if(window.location.hash) {
                 if(response != "Profile Not Found"){
                     document.getElementById("bio").innerHTML=response.bio;
                     document.getElementById("favlift").innerHTML=response.favoriteLift;
-                    document.getElementById("youtube").innerHTML=response.youtube;
                     document.getElementById("instagram").innerHTML=response.instagram;
                     document.getElementById("yearslifting").innerHTML=response.yearsLifting;
                 }

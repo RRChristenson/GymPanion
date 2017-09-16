@@ -1,4 +1,4 @@
-$.getScript("http://cdn.pubnub.com/pubnub-3.4.4.js", function(){    
+$.getScript("https://cdn.pubnub.com/sdk/javascript/pubnub.4.15.1.js", function(){    
 var pubnub = new PubNub({
     subscribeKey: "sub-c-7e42c466-9270-11e7-9c6d-caf7ce3b933f",
     publishKey: "pub-c-e09df898-921f-4220-b126-bc60ceacea5d",
@@ -7,6 +7,7 @@ var pubnub = new PubNub({
 });
   pubnub.addListener({   
     message: function(m) {
+      console.dir(localStorage);
       //handleMessage(m.message);
       if(m.timetoken  > localStorage.latestTimeToken)
         {

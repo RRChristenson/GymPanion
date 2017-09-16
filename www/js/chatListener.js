@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
   document.getElementById("message-button").style.display="none";
-    function getProPic(user){
+    function CreateNewMessageDiv(message,user){
         
         data = {
           "username":user
@@ -12,7 +12,19 @@ $(document).ready(function () {
           dataType : 'json',
           data: data,
           success: function(response){
-              localStorage.picURL = response.profilePic;
+            var newMessage = $("<li class='list-message'>"
+            + "<a class='w-clearfix w-inline-block' href='chat.html#channel="+message.channel+"&recip="+user+"'>"
+            + "<div class='w-clearfix column-left'>"
+            + "<div class='image-message'><img src="+response.profilePic+">"
+            + "</div>"
+            + "</div>"
+            + "<div class='column-right'>"
+            + "<div class='message-title'>"+user+"</div>"
+            + "<div class='message-text' id="+message.channel+">"+message.text+"</div>"
+            + "</div>"
+            + "</a>"
+            + "</li>");
+            messageList.append(newMessage);
         },
         error : function() {
           navigator.notification.alert("error getting profile picture chat");
@@ -48,6 +60,7 @@ $(document).ready(function () {
         console.dir(localStorage);
         if(m.timetoken > localStorage.getItem(m.message.channel))
           {
+            localStorage.setItem(m.message.channel,m.timetoken);
             var channelID=m.message.channel;
             document.getElementById(channelID).innerHTML += "<div class=\"nav-menu-text-right\">  </div>";
           }
@@ -84,22 +97,7 @@ $(document).ready(function () {
             currChatDiv.innerHTML = message.text;
         }
         else{
-            var profilepicURL= getProPic(recipient);
-            //alert(profilepicURL);
-            var newMessage = $("<li class='list-message' >"
-            + "<a class='w-clearfix w-inline-block' href='chat.html#channel="+channelID+"&recip="+recipient+"'>"
-            + "<div class='w-clearfix column-left'>"
-            + "<div class='image-message'><img src="+profilepicURL+">"
-            + "</div>"
-            + "</div>"
-            + "<div class='column-right'>"
-            + "<div class='message-title'>"+recipient+"</div>"
-            + "<div class='message-text' id="+channelID+">"+message.text+"</div>"
-            + "</div>"
-            + "</a>"
-            + "</li>");
-            messageList.append(newMessage);
-            //messageList.listview('refresh');
+            CreateNewMessageDiv(message, recipient);
         }
       
     };
@@ -164,7 +162,6 @@ $(document).ready(function () {
       for(var i = 0; i < message.length; i++) {
         handleMessage(message[i].entry, channel.recipient, false);
         var latestTokenForCurrChat = localStorage.getItem(channel.channelID);
-        console.dir(message[i]);
         if(message[i].timetoken > latestTokenForCurrChat)
           {
             var channelID=message[i].entry.channel;

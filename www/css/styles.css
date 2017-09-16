@@ -233,6 +233,11 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
 }
+.slide.pbg{
+  background-image: url('../img/placeholder.png');
+  background-size: cover;
+  background-position: 60% 0px;
+}
 .slide.bg2 {
   background-image: url('../img/featured1.jpeg');
   background-size: cover;
@@ -248,6 +253,9 @@ a {
   list-style-type: none;
 }
 .list.list-messages {
+  border-top: 1px solid #e7e7e9;
+}
+.list.list-workouts {
   border-top: 1px solid #e7e7e9;
 }
 .list.list-chats {
@@ -670,6 +678,19 @@ a {
   background-color: transparent;
   color: #222;
   font-size: 12px;
+}
+.routineDropDown{
+  width:100%;
+  display: inline-block;
+  height: 38px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.hiddenform{
+  display:none;
 }
 .input-form:focus {
   border-bottom-width: 1px;
@@ -1257,6 +1278,14 @@ a {
   margin-top: 7px;
   border-radius: 25px;
 }
+.workout-column{
+  float: left;
+  text-align: center;
+  margin-left:15px;
+}
+.workout-left-border{
+  border-left: 3px solid #1f5687;
+}
 .column-left {
   position: relative;
   display: block;
@@ -1271,10 +1300,22 @@ a {
   padding-bottom: 5px;
   font-size: 14px;
 }
+.workout-title {
+  display: inline-block;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  font-size: 14px;
+}
 .list-message {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e7e7e9;
+}
+.list-workout {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e7e7e9;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 .list-message:active {
   background-color: #f7f7f7;
@@ -1294,6 +1335,14 @@ a {
   padding-left: 20px;
 }
 .message-text {
+  display: block;
+  padding-bottom: 3px;
+  color: #a3a3a3;
+  font-size: 11px;
+  line-height: 1.6em;
+  text-decoration: none;
+}
+.workout-text {
   display: block;
   padding-bottom: 3px;
   color: #a3a3a3;
@@ -1959,7 +2008,7 @@ input[type=text]:focus, textarea:focus {
     margin: 50px auto;*/
 }
 .flip .card.flipped {
-  -webkit-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg)!important;
 }
 .flip .card {
   width: 100%;

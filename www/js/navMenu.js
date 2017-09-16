@@ -17,6 +17,12 @@ document.write('\
       </div>\
       <div class="nav-menu-titles">Home</div>\
     </a>\
+    <a class="w-clearfix w-inline-block nav-menu-link" href="workoutTracker.html" data-load="1">\
+    <div class="icon-list-menu">\
+      <div class="icon ion-home"></div>\
+    </div>\
+    <div class="nav-menu-titles">Workout Tracker</div>\
+  </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="profile.html#'+localStorage.username+'&" data-load="1">\
     <div class="icon-list-menu">\
       <div class="icon ion-ios-contact-outline"></div>\
@@ -66,7 +72,7 @@ document.write('\
 </div>\
 </div>\
 <div class="message-button navbar-button right" id="message-button" >\
-<div class=navbar-button-icon" data-load="1">\
+<div class="navbar-button-icon" data-load="1">\
   <div class="icon ion-email" id="emailIcon" onclick="loadChat()"></div>\
 </div>\
 </div>\

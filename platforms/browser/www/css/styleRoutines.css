@@ -1,0 +1,42 @@
+.setRepLabel{
+    color: #4d79a0!important;
+    font-size:15px;
+}
+
+.HideLabel{
+  color: #4d79a0!important;
+  font-size:15px;
+  float: right;
+  padding-right: 15px;
+}
+
+.exercise-title {
+    display: inline-block;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    margin-left: 15px;
+    float: left;
+  }
+
+  .reps-form {
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+    height: 38px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-style: solid solid solid;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.2);
+    border-radius: 0px;
+    background-color: transparent;
+    color: #222;
+    font-size: 12px;
+  }
+
+  .addNewSet{
+    margin: 0 auto;
+    text-align: center;
+    width:50%
+  }

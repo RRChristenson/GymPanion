@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Workout Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <script type="text/javascript" src="cordova.js"></script>
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  
+</head>
+<body>
+  
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+        <script src="./js/navMenu.js"></script>
+        <script type="text/javascript">
+        $('#emailIcon').removeClass('icon ion-email');
+        $('#emailIcon').addClass('icon ion-ios-plus-empty');
+        $("#emailIcon").attr("onclick","newWorkout()");
+        function newWorkout(){
+        navigator.notification.prompt(
+          'New Routine Name:',  // message
+          AddRoutine,                  // callback to invoke
+          'Add Routine',            // title
+          ['Ok','Exit']   );           // buttonLabels
+        }
+        function AddRoutine(input){
+          if(input.buttonIndex == 1){
+            var name = input.input1;
+            window.location="editRoutine.html#"+name+"&";
+            //divname = name.replace(/\s+/g, '');
+          }
+        }
+        function gotoRoutine(name){
+          window.location="editRoutine.html#"+name+"&";
+        }
+        </script>
+      <div class="body">
+        <ul data-role="listview" class="list list-workouts" id="RoutineList" style="margin-top: 10px;"id="WorkoutList">
+                <!--<div class="separator-fields"></div>-->
+                <!--<li class='list-workout workout-left-border' onclick='gotoRoutine()'>
+                    <a class='w-clearfix w-inline-block' >
+                    <div class='workout-column'>
+                    <div class='workout-title'>Routine Title</div>
+                    <div class='workout-text' id="workoutDescription">Routine Preview</div>
+                    </div>
+                    </a>
+                    </li>-->
+               
+        </ul>
+      </div>
+    </div>
+    <div class="page-content loading-mask" id="new-stack">
+      <div class="loading-icon">
+        <div class="navbar-button-icon icon ion-load-d"></div>
+      </div>
+    </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    document.addEventListener("deviceready", function(){
+      var data = {'username':localStorage.username};
+        $.ajax({
+          type : "GET",
+          url : "http://gympanion.pythonanywhere.com/GetRoutineList",
+      dataType : 'json',
+      data: data,
+      success: function(response){
+        for (currRoutine in response){
+          name = response[currRoutine];
+          console.dir(name);
+          divname = name.replace(/\s+/g, '');
+          var routine = "<div class='separator-fields'></div>"
+                +"<li class='list-workout workout-left-border' id="+divname+">"
+                +"<a class='w-clearfix w-inline-block'>"
+                +"<div class='workout-column'>"
+                +"<div class='workout-title'>"+name+"</div>"
+                //+"<div class='workout-text' id='workoutDescription'>Routine Preview</div>"
+                +"</div>"
+                +"</a>"
+                +"</li>"
+                +"<script>$('#"+divname+"').click(function(){gotoRoutine(\""+name+"\");});<\/script>"
+          $('#RoutineList').append(routine);//onclick='gotoRoutine()'
+          //$('#'+divname).click(function(){gotoRoutine(name);});
+        }
+
+      },
+      error : function() {
+      navigator.notification.alert("Error retrieving your routines from the server, try again later.");
+      }
+      });
+    });
+    
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

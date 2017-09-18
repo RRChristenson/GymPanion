@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Workout Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/framework.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <script type="text/javascript" src="cordova.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/styleProfile.css">
+  <link rel="stylesheet" type="text/css" href="css/styleRoutines.css">
+  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
+  <link rel="apple-touch-icon" href="img/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  
+</head>
+<body>
+  
+  <section class="w-section mobile-wrapper">
+    <div class="page-content" id="main-stack">
+        <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1">
+            <p class="navbar-title-test" id="routineName">New Routine</p>
+            <div class="w-container">
+        <a class="w-inline-block navbar-button right bigger" data-load="1">
+          <div id="saveRoutine" class="navbar-button-icon icon ion-ios-checkmark-empty"></div>
+        </a>
+        <a class="w-inline-block navbar-button" href="workoutTracker.html" data-load="1">
+          <div class="navbar-button-icon icon ion-ios-close-empty"></div>
+        </a>
+        <script type="text/javascript">
+        var SetNums = {};
+        var NumOfExercises = 0;
+        $('#emailIcon').removeClass('icon ion-email');
+        $('#emailIcon').addClass('icon ion-ios-plus-empty');
+        $("#emailIcon").attr("onclick","newWorkout()");
+        //$('#emailIcon').addClass('icon ion-ios-plus-empty');
+        //$("#emailIcon").attr("onclick","newWorkout()");
+        function newWorkout(){
+          window.location="workouttracker.html";
+        }
+        function addSet(div){
+          SetNums[div] = SetNums[div] + 1;
+          var set = $("<div class='setsReps' style='clear:both;'>"+
+                      "<div class='col-sm-4 follow-left text-centered'>"+
+                      "<p id='setNum"+SetNums[div]+"'>"+SetNums[div]+"</p>"+
+                      "</div>"+
+                      "<div class='col-sm-4 follow-left text-centered'>"+
+                      "<p id='reps'><input class='w-input reps-form' id='reps-field' type='number' min='0' step='1' name='reps' data-name='reps' required='required'></p>"+
+                      "</div>"+
+                      "<div class='col-sm-4 follow-left text-centered'>"+
+                      "<p id='weight'><input class='w-input reps-form' id='weight-field' type='number' min='0' step='1' name='weight' data-name='weight' required='required'></p>"+
+                      "</div>"+
+                      "</div>");
+          $('#setsList'+div).append(set);
+        }
+
+        function addExercise(promptCallback){
+          
+          if(promptCallback.buttonIndex == 1){
+            var name = promptCallback.input1;
+            divname = name.replace(/\s+/g, '');
+            NumOfExercises = NumOfExercises + 1;
+            SetNums[divname] = 1;
+            
+              var exercise =$("<div class='separator-fields'></div>"
+                +"<div class='separator-fields'></div>"
+                +"<li class='list-workout workout-left-border' id=listClass"+divname+">"
+                +"<div class='exercise-title'>"+promptCallback.input1+"</div>"
+                +"<div id=HideExercise class='HideLabel'>Hide Sets</div>"
+                +"<div id='Allsets'>"
+                +"<a class='w-clearfix w-inline-block' id='setsList"+divname+"'>"
+                +"<div class='workout-column'>"
+                +"</div>"
+                +"<div class='setsReps' style='clear:both;'>"
+                +"    <div class='col-sm-4 follow-left text-centered'>"
+                +"        <div class='setRepLabel'>Set</div>"
+                +"        <p id='setNum1'>1</p>"
+                +"      </div>"
+                +"      <div class='col-sm-4 follow-left text-centered'>"
+                +"          <div class='setRepLabel'>Reps</div>"
+                +"        <p id='reps'><input class='w-input reps-form' id='reps-field' type='number' min='0' step='1' name='reps' data-name='reps' required='required'></p>"
+                +"      </div>"
+                +"      <div class='col-sm-4 follow-left text-centered'>"
+                +"          <div class='setRepLabel'>Weight</div>"
+                +"        <p id='weight'><input class='w-input reps-form' id='weight-field' type='number' min='0' step='1' name='weight' data-name='weight' required='required'></p>"
+                +"      </div>"
+                +"    </div>"
+                +"</a>"
+                +"</div>"
+                +"<div class='addNewSet'>"
+                +"    <div id='addnewSet"+divname+"'><div class='setRepLabel'>Add Set</div></div></div>"
+                +"</li>"
+                +"<script>document.getElementById(\"addnewSet"+divname+"\").addEventListener('click', function() {addSet(\""+divname+"\");}, false);<\/script>");
+            $('#Routine').append(exercise);
+          }
+          
+        }
+
+        function saveRoutine(){
+          //alert("saving");
+          var routine = {'name':$('#routineName').text()};
+          var exercises = $("#Routine li");
+          var numExercises = 0;
+          console.dir(exercises);
+          exercises.each(function(i, li) {
+            numExercises += 1;
+            var exercise = $(li);
+            var name = $(li).attr('id').replace('listClass','');
+            var nameWithSpaces = $(li).find('.exercise-title').text();
+            var sets = {};
+            for(i=1;i<=SetNums[name];i++){
+              //var set = exercise.find('#setNum'+i).parent();
+              var repsNum = exercise.find('#setNum'+i).parent().parent().find('#reps-field').val();
+              var weight = exercise.find('#setNum'+i).parent().parent().find('#weight-field').val();
+              sets[i] = {'reps':repsNum,
+                         'weight':weight};
+            }
+            var exerciseObj= {'name':nameWithSpaces,
+                              'sets':sets};
+            routine['Exercise'+numExercises]=exerciseObj;
+          });
+          routine['NumOfExercises']=numExercises;
+          console.dir(routine);
+          //loadRoutine(routine);
+          
+          //Ajax to send routine to server here
+          var data = {'username':localStorage.username,
+                      'routineName':$('#routineName').text(),
+                      'routine':JSON.stringify(routine)};
+          $.ajax({
+            type : "GET",
+            url : "http://gympanion.pythonanywhere.com/SaveRoutine",
+            dataType : 'json',
+            data: data,
+            success: function(response){
+
+              navigator.notification.alert(response);
+            },
+            error : function() {
+            navigator.notification.alert("Error retrieving your routines from the server, try again later.");
+            }
+          });
+        }
+
+        function loadRoutine(routine){
+          //alert("loading");
+          var totalExercises = routine.NumOfExercises;
+          for(i=1; i<=totalExercises; ++i){
+            var currExercise = routine["Exercise"+i];
+            var addExerciseObject = {'input1':currExercise.name,'buttonIndex':1};
+            addExercise(addExerciseObject);
+            var setIndex = 1;
+            for(currSet in currExercise.sets){
+              var reps = currExercise.sets[currSet].reps;
+              var weight = currExercise.sets[currSet].weight;
+              divname = currExercise.name.replace(/\s+/g, '');
+              if(setIndex>1){
+                addSet(divname);
+              }
+              setIndex++;
+            } 
+          }
+          //need to wait for all divs to be appended before searching for list items and filling in values
+          loadSetsReps(routine);
+        }
+
+        function loadSetsReps(routine){
+          var totalExercises = routine.NumOfExercises;
+          for(i=1; i<=totalExercises; ++i){
+            var currExercise = routine["Exercise"+i];
+            var setIndex = 1;
+            for(currSet in currExercise.sets){
+              var reps = currExercise.sets[currSet].reps;
+              var weight = currExercise.sets[currSet].weight;
+              divname = currExercise.name.replace(/\s+/g, '');
+              var exercises = $("#Routine");
+              //alert("finding" + "listClass"+divname);
+              exercises.find("#listClass"+divname).find("#setNum"+setIndex).parent().parent().find('#reps-field').val(reps);
+              exercises.find("#listClass"+divname).find("#setNum"+setIndex).parent().parent().find('#weight-field').val(weight);
+              setIndex++;
+            } 
+          }
+        }
+        </script>
+      <div class="body" style="padding-top: 0px; height: 100vh; overflow:scroll">
+        <ul data-role="listview" class="list list-workouts" id="Routine" style="margin-top: 10px;"id="WorkoutList">
+        </ul>
+        <div class="separator-fields"></div>
+        <div class="separator-fields"></div>
+        <div class="addNewSet">
+            <div  ><div id="addnewExercise" class="setRepLabel">Add Exercise</div></div></div>
+            <div class="setRepLabel" style="padding-bottom:100px;"></div>
+      </div>
+      <div class="separator-fields"></div>
+      <div class="separator-fields"></div>
+      <div class="separator-fields"></div>
+      <div class="separator-fields"></div>
+      <div class="separator-fields"></div>
+      <div class="separator-fields"></div>
+    </div>
+    <div class="page-content loading-mask" id="new-stack">
+      <div class="loading-icon">
+        <div class="navbar-button-icon icon ion-load-d"></div>
+      </div>
+    </div>
+  </section>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+    document.getElementById("addnewExercise").addEventListener("click", function() {
+      navigator.notification.prompt(
+        'Exercise Name',  // message
+        addExercise,                  // callback to invoke
+        'Add Exercise',            // title
+        ['Ok','Exit']   );           // buttonLabels
+}, false);
+$("#Routine").on("click", "#HideExercise", function(event){
+  console.dir($(this).parent());
+  if ($(this).parent().find('#Allsets').is(':visible')){
+    $(this).parent().find('#Allsets').hide();
+    $(this).parent().find('#HideExercise').text("Show Sets");
+  }
+  else{
+    $(this).parent().find('#Allsets').show();
+    $(this).parent().find('#HideExercise').text("Hide Sets");
+  }
+
+});
+$("#saveRoutine").on("click", function(){
+  saveRoutine();
+});
+function addHide(div){
+  divname = "HideExercise"+div;
+  listname = "setsList"+div;
+  document.getElementById(divname).addEventListener("click", function() {
+  if($('#'+listname).is(':visible')){
+    $('#'+listname).hide();
+    $('#'+divname).text("Show Sets");
+  }
+  else{
+    $('#'+listname).show();
+    $('#'+divname).text("Hide Sets");
+  }
+  }, false);
+}
+
+if(window.location.hash) {
+    hash = window.location.hash
+    routineName = hash.substr(1, hash.indexOf('&')-1);
+    $('#routineName').text(routineName);
+    //ajax call to get routine from server
+    var data = {'username':localStorage.username,
+                'routineName':routineName
+               };
+    $.ajax({
+      type : "GET",
+      url : "http://gympanion.pythonanywhere.com/GetRoutine",
+      dataType : 'json',
+      data: data,
+      success: function(response){
+        if(response != "Error"){
+          loadRoutine(response);
+        }
+        else{
+          navigator.notification.alert("Error retrieving your routine from the server, try again later.");
+        }
+        
+      },
+      error : function() {
+        navigator.notification.alert("Error retrieving your routine from the server, try again later.");
+      }
+    });
+}
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/framework.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

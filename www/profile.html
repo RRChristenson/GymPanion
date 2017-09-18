@@ -108,18 +108,10 @@
 <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
 <script type="text/javascript">
   $('.flipCard').click(function(){
-    //document.getElementById("cardFront").addClass('flipped');
-    $('.flip').find('.card').addClass('flipped')//.mouseleave(function(){
-        //$(this).removeClass('flipped');
-    //});
-    //return false;
+    $('.flip').find('.card').addClass('flipped')
 });
-$('.flipback').click(function(){
-    //document.getElementById("cardFront").addClass('flipped');
-    $('.flip').find('.card').removeClass('flipped')//.mouseleave(function(){
-        //$(this).removeClass('flipped');
-    //});
-    //return false;
+  $('.flipback').click(function(){
+    $('.flip').find('.card').removeClass('flipped')
 });
 </script>
 </div>

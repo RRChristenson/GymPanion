@@ -1730,7 +1730,7 @@ a {
 }
 .home-content {
   background-color: white;
-  height:100vh;
+  /*height:100vh;*/
 }
 .title-h1 {
   margin-top: 0px;

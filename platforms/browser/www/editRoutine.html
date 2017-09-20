@@ -16,7 +16,8 @@
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-  
+  <script type="text/javascript" src="js/hammer.min.js"></script>
+  <script type="text/javascript" src="js/swipeToDelete.js"></script>  
 </head>
 <body>
   
@@ -31,6 +32,34 @@
         <a class="w-inline-block navbar-button" href="workoutTracker.html" data-load="1">
           <div class="navbar-button-icon icon ion-ios-close-empty"></div>
         </a>
+    <script>
+    function addSwipe(id) {
+    // Swipe to remove list item
+    //alert("adding swipe");
+    //var routines = $(items);//"#RoutineList li"
+    //routines.each(function(i, li) {
+    //    var routine = $(li);
+    //    var name = $(li).find('.exercise-title').text();
+        var temp = document.getElementById(id);
+        var mc = new Hammer.Manager(temp, {
+            recognizers: [
+                [Hammer.Swipe,{ direction: Hammer.DIRECTION_HORIZONTAL }],
+            ]
+        });
+        mc.on("swipe", function(ev) {
+            if(ev.direction == Hammer.DIRECTION_LEFT){                
+                $('#'+id).addClass("lefttransition")
+                .on( "webkitTransitionEnd transitionend otransitionend", function() {
+                //console.dir(routine);//deleteExercise(routine,name);
+                });                
+            }
+            else if(ev.direction == Hammer.DIRECTION_RIGHT){
+              $('#'+id).removeClass("lefttransition");
+                //routine.addClass("rightransition");
+            }
+        });
+};
+</script>
         <script type="text/javascript">
         var SetNums = {};
         var NumOfExercises = 0;
@@ -57,6 +86,10 @@
                       "</div>");
           $('#setsList'+div).append(set);
         }
+        function deleteExercise(name){
+          divname = name.replace(/\s+/g, '');
+          $("#listClass"+divname).remove();
+        }
 
         function addExercise(promptCallback){
           
@@ -68,7 +101,8 @@
             
               var exercise =$("<div class='separator-fields'></div>"
                 +"<div class='separator-fields'></div>"
-                +"<li class='list-workout workout-left-border' id=listClass"+divname+">"
+                +"<li class='list-workout' id=listClass"+divname+">"
+                +"<div class='workout-left-border'>"
                 +"<div class='exercise-title'>"+promptCallback.input1+"</div>"
                 +"<div id=HideExercise class='HideLabel'>Hide Sets</div>"
                 +"<div id='Allsets'>"
@@ -93,9 +127,13 @@
                 +"</div>"
                 +"<div class='addNewSet'>"
                 +"    <div id='addnewSet"+divname+"'><div class='setRepLabel'>Add Set</div></div></div>"
+                +"</div>"
+                +"<div class='workout-right-border' id=Delete"+divname+"><p class='deleteBtn' style='height: 100%;'>Delete</p></div>"
                 +"</li>"
+                +"<script>$('#Delete"+divname+"').click(function(){deleteExercise(\""+name+"\");});<\/script>"
                 +"<script>document.getElementById(\"addnewSet"+divname+"\").addEventListener('click', function() {addSet(\""+divname+"\");}, false);<\/script>");
             $('#Routine').append(exercise);
+            addSwipe("listClass"+divname);
           }
           
         }

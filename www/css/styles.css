@@ -539,6 +539,13 @@ a {
   background-size: 400px;
   background-repeat: no-repeat;
 }
+.logo-home {
+  height: 90px;
+  background-image: url('../img/logo.png');
+  background-position: 50% 50%;
+  background-size: 150px;
+  background-repeat: no-repeat;
+}
 .logo-login.smaller {
   height: 97px;
   background-size: 70px;
@@ -947,7 +954,7 @@ a {
   width: 100%;
   height: 100%;
   background-image: url('../img/logo.png');
-  background-position: 50% 38%;
+  background-position: 50% 50%;
   background-size: 400px;
   background-repeat: no-repeat;
 }
@@ -1284,7 +1291,24 @@ a {
   margin-left:15px;
 }
 .workout-left-border{
-  border-left: 3px solid #1f5687;
+  width:100%;
+}
+.deleteBtn{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 25px;
+  padding-left: 5px;
+  color: white;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+.workout-right-border{
+  overflow-x:hidden;
+  position:absolute;left:100%;
+  top: 0px;
+  color:white;
+  height: 100%;
+  width: 26%;
+  background-color: #F62459;
 }
 .column-left {
   position: relative;
@@ -1304,7 +1328,8 @@ a {
   display: inline-block;
   padding-top: 3px;
   padding-bottom: 5px;
-  font-size: 14px;
+  font-size: 25px;
+  text-transform: capitalize;
 }
 .list-message {
   padding-top: 10px;
@@ -1315,6 +1340,7 @@ a {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e7e7e9;
+  border-left: 3px solid #1f5687;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 .list-message:active {
@@ -2122,3 +2148,43 @@ input[type=text]:focus, textarea:focus {
     -ms-transform: rotateX(15deg);
     transform: rotateX(15deg);
   }
+
+  .lefttransition {
+    -webkit-transition: -webkit-transform 500ms ease;
+    -webkit-transform: translateX(-25%);
+    -moz-transition: -moz-transform 500ms ease;
+    -moz-transform: translateX(-25%);
+    -o-transition: -o-transform 500ms ease;
+    -o-transform: translateX(-25%);
+    transition: transform 500ms ease;
+    transform: translateX(-25%);
+}
+
+.righttransition {
+  -webkit-transition: -webkit-transform 250ms ease;
+  -webkit-transform: translateX(0%);
+  -moz-transition: -moz-transform 250ms ease;
+  -moz-transform: translateX(0%);
+  -o-transition: -o-transform 250ms ease;
+  -o-transform: translateX(0%);
+  transition: transform 250ms ease;
+  transform: translateX(0%);
+}
+
+.deletebuttonRight{
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.deletebuttonLeft{
+  -webkit-transition: -webkit-transform 250ms ease;
+  -webkit-transform: translateX(-50%);
+  -moz-transition: -moz-transform 250ms ease;
+  -moz-transform: translateX(-50%);
+  -o-transition: -o-transform 250ms ease;
+  -o-transform: translateX(-50%);
+  transition: transform 250ms ease;
+  transform: translateX(-50%);
+}

@@ -19,7 +19,7 @@ document.write('\
     </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="workoutTracker.html" data-load="1">\
     <div class="icon-list-menu">\
-      <div class="icon ion-home"></div>\
+      <div class="icon ion-compose"></div>\
     </div>\
     <div class="nav-menu-titles">Workout Tracker</div>\
   </a>\

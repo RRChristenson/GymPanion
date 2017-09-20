@@ -13,13 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-  
+  <script type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  <script type="text/javascript" src="js/hammer.min.js"></script>
+  <script type="text/javascript" src="js/swipeToDelete.js"></script>
 </head>
 <body>
   
   <section class="w-section mobile-wrapper">
-    <div class="page-content" id="main-stack">
+    <div class="page-content" style="overflow-x:hidden" id="main-stack">
         <script src="./js/navMenu.js"></script>
         <script type="text/javascript">
         $('#emailIcon').removeClass('icon ion-email');
@@ -42,18 +43,42 @@
         function gotoRoutine(name){
           window.location="editRoutine.html#"+name+"&";
         }
+
+        function deleteRoutine(name){
+          divname = name.replace(/\s+/g, '');
+          $("#"+divname).remove();
+          data={'username':localStorage.username,
+                'routine':name}
+          $.ajax({
+            type : "GET",
+            url : "http://gympanion.pythonanywhere.com/DeleteRoutine",
+            dataType : 'json',
+            data: data,
+            success: function(response){
+              if(response == "Failed"){
+                navigator.notification.alert("Oops! There was an error deleting your routine. Try again later.");
+              }
+            },
+            error : function() {
+            navigator.notification.alert("Oops! There was an error deleting your routine. Try again later.");
+      }
+      });
+      }
         </script>
       <div class="body">
-        <ul data-role="listview" class="list list-workouts" id="RoutineList" style="margin-top: 10px;"id="WorkoutList">
+          <div class="separator-fields">
+          <div class="separator-fields">
+          <p class="logo" style="text-align:center; margin-top:20px;">Saved Routines:</p>
+        <ul data-role="listview" class="list list-workouts" id="RoutineList" style="margin-top: 10px;">
                 <!--<div class="separator-fields"></div>-->
-                <!--<li class='list-workout workout-left-border' onclick='gotoRoutine()'>
+                <!--<li class='list-workout workout-left-border' id="testing">
                     <a class='w-clearfix w-inline-block' >
                     <div class='workout-column'>
                     <div class='workout-title'>Routine Title</div>
                     <div class='workout-text' id="workoutDescription">Routine Preview</div>
                     </div>
                     </a>
-                    </li>-->
+                  </li>-->
                
         </ul>
       </div>
@@ -74,35 +99,58 @@
       dataType : 'json',
       data: data,
       success: function(response){
-        for (currRoutine in response){
+        if (response != "No Routines"){
+          for (currRoutine in response){
           name = response[currRoutine];
           console.dir(name);
           divname = name.replace(/\s+/g, '');
           var routine = "<div class='separator-fields'></div>"
-                +"<li class='list-workout workout-left-border' id="+divname+">"
+                +"<li class='list-workout' id="+divname+">"
+                +"<div class='workout-left-border'>"
                 +"<a class='w-clearfix w-inline-block'>"
                 +"<div class='workout-column'>"
                 +"<div class='workout-title'>"+name+"</div>"
                 //+"<div class='workout-text' id='workoutDescription'>Routine Preview</div>"
+                //+"<div style='float:right; width: 50%;'>DELETE</div>"
                 +"</div>"
                 +"</a>"
+                +"</div>"
+                +"<div class='workout-right-border' id=Delete"+divname+"><p class='deleteBtn'>Delete</p></div>"
                 +"</li>"
                 +"<script>$('#"+divname+"').click(function(){gotoRoutine(\""+name+"\");});<\/script>"
+                +"<script>$('#Delete"+divname+"').click(function(){deleteRoutine(\""+name+"\");});<\/script>"
           $('#RoutineList').append(routine);//onclick='gotoRoutine()'
           //$('#'+divname).click(function(){gotoRoutine(name);});
         }
-
+        addSwipes("#RoutineList li");
+      }
       },
       error : function() {
       navigator.notification.alert("Error retrieving your routines from the server, try again later.");
       }
       });
+      
     });
     
+  </script>
+  <script>
+    /*document.addEventListener("deviceready",function(){
+      var myElement = document.getElementById("testing");
+      var mc = new Hammer.Manager(myElement, {
+	      recognizers: [
+		      [Hammer.Swipe,{ direction: Hammer.DIRECTION_HORIZONTAL }],
+	      ]
+      });
+      mc.on("swipe", function(ev) {
+        alert("swiped");
+      });
+    });*/
+
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
+
 </body>
 </html>

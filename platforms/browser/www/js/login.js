@@ -5,7 +5,7 @@ function sendLogin(){
     $.ajax({
         
                type : "POST",
-               url : "http://gympanion.pythonanywhere.com/login",
+               url : "http://fitpanion.com/login",
                dataType : 'json',
                username: user,
                password: pass,

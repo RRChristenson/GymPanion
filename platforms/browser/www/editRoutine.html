@@ -171,7 +171,7 @@
                       'routine':JSON.stringify(routine)};
           $.ajax({
             type : "GET",
-            url : "http://gympanion.pythonanywhere.com/SaveRoutine",
+            url : "http://fitpanion.com/SaveRoutine",
             dataType : 'json',
             data: data,
             success: function(response){
@@ -300,7 +300,7 @@ if(window.location.hash) {
                };
     $.ajax({
       type : "GET",
-      url : "http://gympanion.pythonanywhere.com/GetRoutine",
+      url : "http://fitpanion.com/GetRoutine",
       dataType : 'json',
       data: data,
       success: function(response){

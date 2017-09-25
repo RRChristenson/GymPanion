@@ -7,7 +7,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type : "GET",
-      url : "http://gympanion.pythonanywhere.com/newChat",
+      url : "http://fitpanion.com/newChat",
       dataType : 'json',
       data: data,
       success: function(){}
@@ -119,7 +119,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type : "GET",
-      url : "http://gympanion.pythonanywhere.com/newChat",
+      url : "http://fitpanion.com/newChat",
       dataType : 'json',
       data: data,
       success: function(){}
@@ -181,7 +181,7 @@ function getProPic(user){
   };
   $.ajax({
     type : "GET",
-    url : "http://gympanion.pythonanywhere.com/getProPic",
+    url : "http://fitpanion.com/getProPic",
     dataType : 'json',
     data: data,
     success: function(response){

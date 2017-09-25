@@ -6,7 +6,7 @@ if(window.location.hash) {
        };
     $.ajax({
         type : "GET",
-        url : "http://gympanion.pythonanywhere.com/getProPic",
+        url : "http://fitpanion.com/getProPic",
     dataType : 'json',
     data: data,
     success: function(response){
@@ -23,7 +23,7 @@ if(window.location.hash) {
     };
     $.ajax({
         type : "GET",
-        url : "http://gympanion.pythonanywhere.com/getAllProPics",
+        url : "http://fitpanion.com/getAllProPics",
     dataType : 'json',
     data: data,
     success: function(response){
@@ -40,7 +40,7 @@ if(window.location.hash) {
     $.ajax({
         
                type : "GET",
-               url : "http://gympanion.pythonanywhere.com/getProfileData",
+               url : "http://fitpanion.com/getProfileData",
                headers: {
                     'Access-Control-Allow-Origin': '*'
                 },

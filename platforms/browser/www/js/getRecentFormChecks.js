@@ -1,7 +1,7 @@
 $.ajax({
     
            type : "GET",
-           url : "http://gympanion.pythonanywhere.com/getRecentFormChecks",
+           url : "http://fitpanion.com/getRecentFormChecks",
            dataType : 'json',
            success: function(response){
             let debug = document.getElementById("debug");

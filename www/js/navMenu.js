@@ -86,7 +86,7 @@ data = {\
                  };\
 $.ajax({\
        type : "GET",\
-       url : "http://gympanion.pythonanywhere.com/getProPic",\
+       url : "http://fitpanion.com/getProPic",\
        dataType : \'json\',\
        data: data,\
        success: function(response){\

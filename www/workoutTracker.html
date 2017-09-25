@@ -51,7 +51,7 @@
                 'routine':name}
           $.ajax({
             type : "GET",
-            url : "http://gympanion.pythonanywhere.com/DeleteRoutine",
+            url : "http://fitpanion.com/DeleteRoutine",
             dataType : 'json',
             data: data,
             success: function(response){
@@ -95,7 +95,7 @@
       var data = {'username':localStorage.username};
         $.ajax({
           type : "GET",
-          url : "http://gympanion.pythonanywhere.com/GetRoutineList",
+          url : "http://fitpanion.com/GetRoutineList",
       dataType : 'json',
       data: data,
       success: function(response){

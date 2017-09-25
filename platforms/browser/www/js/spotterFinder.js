@@ -20,7 +20,7 @@ function onSuccess(pos) {
        };
     $.ajax({
         type : "GET",
-        url : "http://gympanion.pythonanywhere.com/publishSpotterSearch",
+        url : "http://fitpanion.com/publishSpotterSearch",
     dataType : 'json',
     data: data,
     success: function(response){

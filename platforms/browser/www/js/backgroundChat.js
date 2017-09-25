@@ -71,12 +71,13 @@ var pubnub = new PubNub({
   checkChatDatabase();
 
 function checkChatDatabase(){
+  console.log("CheckingDB");
   data = {
     "sender":localStorage.username
   };
   $.ajax({
     type : "GET",
-    url : "http://gympanion.pythonanywhere.com/checkChatDB",
+    url : "http://fitpanion.com/checkChatDB",
     dataType : 'json',
     data: data,
     success: function(response){
@@ -84,7 +85,7 @@ function checkChatDatabase(){
       var channelName = response[channel];
       //alert(channelName.channelID);
       //localStorage.currRecip=channelName.recipient;
-      localStorage.newMessage = false;
+      //localStorage.newMessage = false;
       subscribe(channelName);
       }
    //subscribe(response);
@@ -93,6 +94,7 @@ function checkChatDatabase(){
     navigator.notification.alert("error getting profile picture for navigation menu");
   }
   });
+  setTimeout(checkChatDatabase, 5000);
 }
 
 function subscribe(channel){

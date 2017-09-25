@@ -27,7 +27,7 @@
        };
     $.ajax({
         type : "GET",
-        url : "http://gympanion.pythonanywhere.com/getAllProPics",
+        url : "http://fitpanion.com/getAllProPics",
     dataType : 'json',
     data: data,
     success: function(response){
@@ -78,12 +78,13 @@
         options.chunkedMode = false;
        
        var ft = new FileTransfer();
-        ft.upload(imageURI, "http://gympanion.pythonanywhere.com/uploadProfile", function(result){
+        ft.upload(imageURI, "http://www.fitpanion.com/uploadProfile", function(result){
         console.log(JSON.stringify(result));
         winLoc = "profile.html#"+localStorage.username+"&";
         window.location=winLoc;
         }, function(error){
-        alert("FUCKCKCKCKCKCK")
+          console.dir(error);
+        alert(error.message)
         }, options);
     }
     function getPhoto(source) {

@@ -2159,6 +2159,28 @@ input[type=text]:focus, textarea:focus {
     transition: transform 500ms ease;
     transform: translateX(-25%);
 }
+.lefttransitionNearbyList{
+  -webkit-transition: -webkit-transform 500ms ease;
+  -webkit-transform: translateX(-100%);
+  -moz-transition: -moz-transform 500ms ease;
+  -moz-transform: translateX(-100%);
+  -o-transition: -o-transform 500ms ease;
+  -o-transform: translateX(-100%);
+  transition: transform 500ms ease;
+  transform: translateX(-100%);
+
+}
+.righttransitionNearbyList{
+  -webkit-transition: -webkit-transform 500ms ease;
+  -webkit-transform: translateX(100%);
+  -moz-transition: -moz-transform 500ms ease;
+  -moz-transform: translateX(100%);
+  -o-transition: -o-transform 500ms ease;
+  -o-transform: translateX(100%);
+  transition: transform 500ms ease;
+  transform: translateX(100%);
+
+}
 
 .righttransition {
   -webkit-transition: -webkit-transform 250ms ease;

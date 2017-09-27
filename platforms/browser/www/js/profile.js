@@ -16,7 +16,6 @@ if(window.location.hash) {
     navigator.notification.alert("error getting profile picture");
     }
     });
-    //localStorage.recip = window.location.hash.substring(hash.indexOf('&')+7,hash.length);
     document.getElementById("name").innerHTML=username;
     data = {
         "username":username
@@ -82,8 +81,18 @@ if(window.location.hash) {
             var uploadProPics = "uploadProPics.html#"+localStorage.username+"&";
             document.getElementById("profilePicture").setAttribute('href',uploadProPics);
         }
-    // hash foun
+    else{
+        var menuButton = document.getElementById("menu-button");
+        $("#menu-wrapper").empty();
+        var backButton = $("<div class=\"message-button navbar-button left\""
+        +"<div class=\"navbar-button-icon\">"
+        +"<div class=\"icon ion-arrow-left-a\" id=\"backIcon\" onclick=\"goBack()\"></div>");
+        +"</div>"
+        $("#menu-wrapper").append(backButton);
+    }
+    function goBack(){
+        window.location="nearbyList.html#"+username+"&";
+    }
 } else {
-    // No hash found
 }
 

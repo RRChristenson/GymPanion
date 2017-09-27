@@ -47,12 +47,6 @@ document.write('\
       </div>\
         <div class="nav-menu-titles">Get a Routine</div>\
     </a>\
-    <a class="w-clearfix w-inline-block nav-menu-link" href="Coaching.html" data-load="1">\
-      <div class="icon-list-menu">\
-        <div class="icon ion-ios-people"></div>\
-      </div>\
-        <div class="nav-menu-titles">Coaching</div>\
-    </a>\
     <a class="w-clearfix w-inline-block nav-menu-link" href="logout.html" data-load="1">\
     <div class="icon-list-menu">\
       <div class="icon ion-ios-arrow-back"></div>\
@@ -63,12 +57,14 @@ document.write('\
     <div class="separator-bottom"></div>\
     <div class="separator-bottom"></div>\
   </nav>\
+<div id="menu-wrapper">\
 <div class="wrapper-mask" data-ix="menu-mask"></div>\
 <div class="w-nav-button navbar-button left" id="menu-button" data-ix="hide-navbar-icons">\
 <div class="navbar-button-icon home-icon">\
   <div class="bar-home-icon top"></div>\
   <div class="bar-home-icon middle"></div>\
   <div class="bar-home-icon bottom"></div>\
+</div>\
 </div>\
 </div>\
 <div class="message-button navbar-button right" id="message-button" >\

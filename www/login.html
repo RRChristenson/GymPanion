@@ -80,16 +80,16 @@
                dataType : 'json',
                data: data,
                success: function(response){   
-                for (var key in response){
-                    var keyVal = key;
-                    var authenticated = response[keyVal];
-                    if (authenticated == 'true')
-                    {
+                    var authenticated = response.Authenticated;
+                    if (authenticated == 'true'){
                       window.location = "home.html";
                       localStorage.username=user;
                       localStorage.authenticated=true;
+                      localStorage.authToken = response.Token;
+                    }      
+                    else if(authenticated == 'false'){
+                      navigator.notification.alert("Invalid Username or Password");
                     }
-                }         
                },
                error : function() {
                    navigator.notification.alert("Invalid Username or Password");

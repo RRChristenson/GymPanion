@@ -45,7 +45,9 @@
         }
 
         function deleteRoutine(name){
-          divname = name.replace(/\s+/g, '');
+          nospace = name.replace(/\s+/g,'');
+          nobackslash = nospace.replace(/\\/g,'');
+          divname = nobackslash.replace(/\//g,'');
           $("#"+divname).remove();
           data={'username':localStorage.username,
                 'routine':name}
@@ -103,7 +105,9 @@
           for (currRoutine in response){
           name = response[currRoutine];
           console.dir(name);
-          divname = name.replace(/\s+/g, '');
+          nospace = name.replace(/\s+/g,'');
+          nobackslash = nospace.replace(/\\/g,'');
+          divname = nobackslash.replace(/\//g,'');
           var routine = "<div class='separator-fields'></div>"
                 +"<li class='list-workout' id="+divname+">"
                 +"<div class='workout-left-border'>"

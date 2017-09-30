@@ -16,7 +16,8 @@ function onSuccess(pos) {
         "radius":localStorage.spotterRadius,
         "gender":localStorage.gender,
         "latitude":localStorage.lat,
-        "longitude":localStorage.long
+        "longitude":localStorage.long,
+        "authToken":localStorage.authToken
        };
     $.ajax({
         type : "GET",

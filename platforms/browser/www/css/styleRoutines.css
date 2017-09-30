@@ -18,6 +18,14 @@
     margin-left: 15px;
     float: left;
   }
+  .AccesoriesText {
+    color: #4d79a0!important;
+    display: inline-block;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    text-align: center;
+  }
 
   .reps-form {
     display: inline-block;

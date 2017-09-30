@@ -120,7 +120,8 @@ $(document).ready(function () {
   
   function checkChatDatabase(){
     data = {
-      "sender":localStorage.username
+      "sender":localStorage.username,
+      "authToken":localStorage.authToken
     };
     $.ajax({
       type : "GET",

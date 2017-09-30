@@ -50,7 +50,8 @@
           divname = nobackslash.replace(/\//g,'');
           $("#"+divname).remove();
           data={'username':localStorage.username,
-                'routine':name}
+                'routine':name,
+                'authToken':localStorage.authToken}
           $.ajax({
             type : "GET",
             url : "http://fitpanion.com/DeleteRoutine",
@@ -94,7 +95,8 @@
   <script src="js/webfont.js"></script>
   <script>
     document.addEventListener("deviceready", function(){
-      var data = {'username':localStorage.username};
+      var data = {'username':localStorage.username,
+                  'authToken':localStorage.authToken};
         $.ajax({
           type : "GET",
           url : "http://fitpanion.com/GetRoutineList",

@@ -168,7 +168,8 @@
           //Ajax to send routine to server here
           var data = {'username':localStorage.username,
                       'routineName':$('#routineName').text(),
-                      'routine':JSON.stringify(routine)};
+                      'routine':JSON.stringify(routine),
+                      'authToken':localStorage.authToken};
           $.ajax({
             type : "GET",
             url : "http://fitpanion.com/SaveRoutine",
@@ -296,7 +297,8 @@ if(window.location.hash) {
     $('#routineName').text(routineName);
     //ajax call to get routine from server
     var data = {'username':localStorage.username,
-                'routineName':routineName
+                'routineName':routineName,
+                'authToken':localStorage.authToken
                };
     $.ajax({
       type : "GET",

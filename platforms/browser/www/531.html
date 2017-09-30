@@ -225,22 +225,85 @@
           }
         }
         </script>
-      <div class="body" style="padding-top: 0px; height: 100vh; overflow:scroll">
-        <ul data-role="listview" class="list list-workouts" id="Routine" style="margin-top: 10px;"id="WorkoutList">
-        </ul>
-        <div class="separator-fields"></div>
-        <div class="separator-fields"></div>
-        <div class="addNewSet">
-            <div  ><div id="addnewExercise" class="setRepLabel">Add Exercise</div></div></div>
-            <div class="setRepLabel" style="padding-bottom:100px;"></div>
-      </div>
-      <div class="separator-fields"></div>
-      <div class="separator-fields"></div>
-      <div class="separator-fields"></div>
-      <div class="separator-fields"></div>
-      <div class="separator-fields"></div>
-      <div class="separator-fields"></div>
-    </div>
+            <div class="body" style="padding-top: 0px; height: 100vh; overflow:scroll">
+
+                <ul data-role="listview" class="list list-workouts" id="Routine" style="margin-top: 10px;"id="WorkoutList">
+                    <div class='separator-fields'></div>
+                    <div class='separator-fields'></div>
+                    <li class='list-workout' id='listClassBench'>
+                    <div class='workout-left-border'>
+                    <div class='exercise-title'>Bench</div>
+                    <div id='Allsets'>
+                    <a class='w-clearfix w-inline-block' id='setsListBench'>
+                    <div class='workout-column'>
+                    </div>
+                    <div class='setsReps' style='clear:both;'>
+                        <div class='col-sm-4 follow-left text-centered'>
+                            <div class='setRepLabel'>Set</div>
+                            <p id='setNum1'>1</p>
+                          </div>
+                          <div class='col-sm-4 follow-left text-centered'>
+                              <div class='setRepLabel'>Reps</div>
+                              <p id='RepsNum1'>5</p>
+                          </div>
+                          <div class='col-sm-4 follow-left text-centered'>
+                              <div class='setRepLabel'>Weight</div>
+                              <p id='WeightNum1'>200</p>
+                          </div>
+                        </div>
+                        <div class='setsReps' style='clear:both;'>
+                            <div class='col-sm-4 follow-left text-centered'>
+                                <div class='setRepLabel'>Set</div>
+                                <p id='setNum2'>2</p>
+                              </div>
+                              <div class='col-sm-4 follow-left text-centered'>
+                                  <div class='setRepLabel'>Reps</div>
+                                  <p id='RepsNum2'>5</p>
+                              </div>
+                              <div class='col-sm-4 follow-left text-centered'>
+                                  <div class='setRepLabel'>Weight</div>
+                                  <p id='WeightNum2'>200</p>
+                              </div>
+                            </div>
+                            <div class='setsReps' style='clear:both;'>
+                                <div class='col-sm-4 follow-left text-centered'>
+                                    <div class='setRepLabel'>Set</div>
+                                    <p id='setNum3'>3</p>
+                                  </div>
+                                  <div class='col-sm-4 follow-left text-centered'>
+                                      <div class='setRepLabel'>Reps</div>
+                                      <p id='RepsNum3'>5</p>
+                                  </div>
+                                  <div class='col-sm-4 follow-left text-centered'>
+                                      <div class='setRepLabel'>Weight</div>
+                                      <p id='WeightNum3'>200</p>
+                                  </div>
+                                </div>
+                    </a>
+                    </div>
+                    </div>
+                    <div class='workout-right-border' id="DeleteBench"><p class='deleteBtn' style='height: 100%;'>Delete</p></div>
+                    </li>
+                    <div class="separator-fields"></div>
+                    <div class="separator-fields"></div>
+                    <li class='list-workout' id='accessories'>
+                        <div class='workout-left-border'>
+                        <div class='exercise-title'>Accesories</div>
+                        <div class='AccesoriesText'>You can do as many or as few accessory lifts as you want.</div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="separator-fields"></div>
+                <div class="separator-fields"></div>
+                    <div class="setRepLabel" style="padding-bottom:100px;"></div>
+              </div>
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+              <div class="separator-fields"></div>
+            </div>
     <div class="page-content loading-mask" id="new-stack">
       <div class="loading-icon">
         <div class="navbar-button-icon icon ion-load-d"></div>

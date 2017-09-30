@@ -73,7 +73,8 @@ var pubnub = new PubNub({
 function checkChatDatabase(){
   console.log("CheckingDB");
   data = {
-    "sender":localStorage.username
+    "sender":localStorage.username,
+    "authToken":localStorage.authToken
   };
   $.ajax({
     type : "GET",

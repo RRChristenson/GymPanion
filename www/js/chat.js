@@ -115,7 +115,8 @@ $(document).ready(function () {
     data = {
       "channel":localStorage.chan,
       "sender":localStorage.username,
-      "recipient":localStorage.recip
+      "recipient":localStorage.recip,
+      "authToken":localStorage.authToken
     };
     $.ajax({
       type : "GET",

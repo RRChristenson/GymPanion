@@ -10,6 +10,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
   <link rel="apple-touch-icon" href="img/logo.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script type="text/javascript" src="cordova.js"></script>
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -116,7 +117,8 @@
                       "yearsLifting":yearsLifting,
                       "instagram":insta,
                       "youtube":youtube,
-                      "bio":bio
+                      "bio":bio,
+                      "authToken":localStorage.authToken
                      };
       $.ajax({
         
@@ -129,7 +131,7 @@
                dataType : 'json',
                data: data,
                success: function(response){   
-                 navigator.notification.alert("Profile Updated");
+                navigator.notification.alert("Profile Updated");
                  loc = "profile.html#"+localStorage.username+"&";
                  window.location=loc;
        

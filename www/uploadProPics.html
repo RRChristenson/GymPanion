@@ -23,7 +23,8 @@
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" charset="utf-8">
       data = {
-        "username":localStorage.username
+        "username":localStorage.username,
+        "authToken":localStorage.authToken
        };
     $.ajax({
         type : "GET",
@@ -74,6 +75,7 @@
         var params = new Object();
         params.username = localStorage.username;
         params.profilePic = localStorage.uploadpic;
+        params.authToken = localStorage.authToken;
         options.params = params;
         options.chunkedMode = false;
        

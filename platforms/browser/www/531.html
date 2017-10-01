@@ -35,8 +35,8 @@
         <script type="text/javascript">
         var SetNums = {};
         var NumOfExercises = 0;
-        var oneRepMax = 225;
         var weekSelected;
+        var OneRepMax;
         $('#emailIcon').removeClass('icon ion-email');
         $('#emailIcon').addClass('icon ion-ios-plus-empty');
         $("#emailIcon").attr("onclick","newWorkout()");
@@ -44,7 +44,25 @@
         //$("#emailIcon").attr("onclick","newWorkout()");
         </script>
             <div class="body" style="padding-top: 0px; height: 100vh; overflow:scroll">
-                <div>
+                <div class="separator-fields"></div>
+                <div class="separator-fields"></div>
+                <div id="reCalculate1RM" style="text-align:center;">
+                  <p>Recalulate 1RM</p>
+                </div>
+                <form id="Calc1RM" style="margin-left:3%;">
+                    <div style="width:33%; display:inline-block;">
+                      <label class="label-form light" for="weight">Weight lifted</label>
+                      <input class="w-input input-form light" id="weight-field" type="text" name="weight" data-name="weight" required="required">
+                    </div>
+                    <div style="width:33%; display:inline-block;">
+                      <label class="label-form light"  for="reps">Reps</label>
+                      <div class="block-input-combined">
+                        <input class="w-input input-form light left"  id="reps-field" name="reps" data-name="reps" required="required">
+                      </div>
+                    </div>
+                    <input class="w-button week-button" style="background-color:#1f5687;display:inline-block;position:absolute;" id="calculate" type="submit" value="Calculate 1RM" data-wait="Please wait...">
+                    </form>
+                <div id="PickADay">
                     <div class="separator-fields"></div>
                     <div class="separator-fields"></div>
                     <label class="label-form" for="node-10" style="padding-left: 10px;">Which Day?</label>
@@ -197,20 +215,81 @@
         if(week == 'Week 1'){
           $('#RepsNum1').text(5);
           $('#RepsNum2').text(5);
-          $('#RepsNum3').text(5);
+          $('#RepsNum3').text("5+");
+          var weight = OneRepMax*(.65);
+          $('#WeightNum1').text(Math.ceil(weight/5)*5);
+          weight = OneRepMax*(.75);
+          $('#WeightNum2').text(Math.ceil(weight/5)*5);
+          weight = OneRepMax*(.85);
+          $('#WeightNum3').text(Math.ceil(weight/5)*5);
         }
         else if(week == "Week 2"){
           $('#RepsNum1').text(3);
           $('#RepsNum2').text(3);
-          $('#RepsNum3').text(3);
+          $('#RepsNum3').text("3+");
+
+          var weight = OneRepMax*(.70);
+          $('#WeightNum1').text(Math.ceil(weight/5)*5);
+          weight = OneRepMax*(.80);
+          $('#WeightNum2').text(Math.ceil(weight/5)*5);
+          weight = OneRepMax*(.90);
+          $('#WeightNum3').text(Math.ceil(weight/5)*5);
         }
         else if(week == "Week 3"){
           $('#RepsNum1').text(5);
           $('#RepsNum2').text(3);
           $('#RepsNum3').text("1+");
+
+          var weight = OneRepMax*(.75);
+          $('#WeightNum1').text(Math.ceil(weight/5)*5);
+          weight = OneRepMax*(.85);
+          $('#WeightNum2').text(Math.ceil(weight/5)*5);
+          weight = OneRepMax*(.95);
+          $('#WeightNum3').text(Math.ceil(weight/5)*5);
         }
         
       }
+    </script>
+    <script>
+      $('#PickADay').hide();
+      $('#setDay').hide();
+      $('#reCalculate1RM').hide();
+      $('#Calc1RM').submit(function(event){
+        $('#PickADay').addClass('animated bounceInLeft');
+        $('#setDay').addClass('animated bounceInLeft');
+        $('#PickADay').show();
+        $('#setDay').show();
+        $('#Calc1RM').addClass('animated bounceOutLeft');
+        $('#Calc1RM').hide();
+        $('#reCalculate1RM').addClass('animated fadeIn');
+        $('#reCalculate1RM').show();
+        var reps = $('#reps-field').val();
+        var weight = $('#weight-field').val();
+        if(/^\d+$/.test(reps) && /^\d+$/.test(weight)){
+          OneRepMax = weight/(1.0278 - (0.0278 * reps));
+          alert("1RM = "+OneRepMax);
+        }
+        else{
+          navigator.notification.alert("Please enter valid weight and/or reps");
+        }
+
+
+      event.preventDefault();
+
+    });
+
+    $('#reCalculate1RM').click(function(){
+      $('#reCalculate1RM').hide();
+      //$('#Calc1RM').removeClass('animated bounceInLeft');
+      //$('#Calc1RM').addClass('animated bounceOutRight');
+      //$('#Calc1RM').hide();
+      $('#Calc1RM').removeClass('animated bounceOutLeft');
+      $('#Calc1RM').addClass('animated bounceInLeft');
+      $('#Calc1RM').show();
+      $('#PickADay').hide();
+      $('#setDay').hide();
+      $('#BenchDay').hide();
+    });
     </script>
 </body>
 </html>

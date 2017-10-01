@@ -2210,3 +2210,18 @@ input[type=text]:focus, textarea:focus {
   transition: transform 250ms ease;
   transform: translateX(-50%);
 }
+
+.week-button {
+  display: inline-block;
+  width: 30%;
+  height: 49px;
+  padding: 12px;
+  background-color: #4d79a0;
+  color: white;
+  font-size: 12px;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 12px;
+}

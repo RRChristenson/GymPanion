@@ -83,69 +83,43 @@
   }
   </script>
   <script>
-    document.addEventListener("deviceready", function(){
- 
-    store.verbosity = store.INFO;
-    store.register({
-      id: "531Routine",
-      alias: "531 Routine",
-      type: store.NON_CONSUMEABLE
-    });
-    alert("store registered");
-  store.refresh();
-  alert("store refreshed");
-  show();
-    function show() {
-        render();
-        store.when("531Routine").updated(render);
-    }
+    // We must wait for the "deviceready" event to fire
+    // before we can use the store object.
+    document.addEventListener('deviceready', initializeStore, false);
 
-    function render() {
+    function initializeStore() {
+      navigator.notification.alert("In Init Store");
 
-        // Get the product from the pool.
-        var product = store.get("531Routine");
-        var productNameDiv = $("531Name");
-        var productDiv = $("#531Description");
-        var productPriceDiv = $("#531Price");
+        // Let's set a pretty high verbosity level, so that we see a lot of stuff
+        // in the console (reassuring us that something is happening).
+        store.verbosity = store.INFO;
 
-        if (!product) {
-          productNameDiv.html("");
-          productDiv.html("");
-        }
-        else if (product.state === store.REGISTERED) {
-          productNameDiv.html("");
-          productDiv.html("");
-        }
-        else if (product.state === store.INVALID) {
-          productNameDiv.html("");
-          productDiv.html("");
-        }
-        else {
-            // Good! Product loaded and valid.
-            productNameDiv.html(product.title);
-            productDiv.html(product.description);
-            productPriceDiv.html(product.price);
+        navigator.notification.alert("Verbosity Set");
 
-            // Is this product owned? Give him a special class.
-            //if (product.owned)
-            //    $el.addClass("owned");
-            // else
-            //    $el.removeClass("owned");
+        // We register a dummy product. It's ok, it shouldn't
+       // prevent the store "ready" event from firing.
+        store.register({
+            id:    "531Routine",
+            alias: "531 Routine",
+            type:  store.NON_CONSUMEABLE
+        });
 
-            // Is an order for this product in progress? Can't be ordered right now?
-            //if (product.canPurchase)
-            //    $el.addClass("can-purchase");
-            //else
-            //    $el.removeClass("can-purchase");
-        }
-    }
+        navigator.notification.alert("Store Registered!!");
 
-    // method called when the view is hidden
-    function hide() {
-        // stop monitoring the product
-        store.off(render);
-    }
-  });
+    // When every goes as expected, it's time to celebrate!
+    // The "ready" event should be welcomed with music and fireworks,
+    // go ask your boss about it! (just in case)
+        store.ready(function() {
+          navigator.notification.alert("Store Ready!!");
+            console.log("\\o/ STORE READY \\o/");
+        });
+
+    // After we've done our setup, we tell the store to do
+    // it's first refresh. Nothing will happen if we do not call store.refresh()
+        store.refresh();
+}
+
+    
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>

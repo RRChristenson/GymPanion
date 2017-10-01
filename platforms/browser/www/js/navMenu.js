@@ -41,7 +41,7 @@ document.write('\
       </div>\
       <div class="nav-menu-titles">Gym Finder</div>\
     </a>\
-    <a class="w-clearfix w-inline-block nav-menu-link" href="531.html" data-load="1">\
+    <a class="w-clearfix w-inline-block nav-menu-link" href="PremiumRoutines.html" data-load="1">\
       <div class="icon-list-menu">\
         <div class="icon ion-ios-pulse-strong"></div>\
       </div>\

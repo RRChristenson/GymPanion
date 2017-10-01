@@ -46,22 +46,13 @@
             <div class="body" style="padding-top: 0px; height: 100vh; overflow:scroll">
                 <div class="separator-fields"></div>
                 <div class="separator-fields"></div>
-                <div id="reCalculate1RM" style="text-align:center;">
-                  <p>Recalulate 1RM</p>
+                <div id="rechooseDay" style="text-align:center;">
+                  <p>Re-Choose Day</p>
                 </div>
-                <form id="Calc1RM" style="margin-left:3%;">
-                    <div style="width:33%; display:inline-block;">
-                      <label class="label-form light" for="weight">Weight lifted</label>
-                      <input class="w-input input-form light" id="weight-field" type="text" name="weight" data-name="weight" required="required">
-                    </div>
-                    <div style="width:33%; display:inline-block;">
-                      <label class="label-form light"  for="reps">Reps</label>
-                      <div class="block-input-combined">
-                        <input class="w-input input-form light left"  id="reps-field" name="reps" data-name="reps" required="required">
-                      </div>
-                    </div>
-                    <input class="w-button week-button" style="background-color:#1f5687;display:inline-block;position:absolute;" id="calculate" type="submit" value="Calculate 1RM" data-wait="Please wait...">
-                    </form>
+                <div id="reCalculate1RM" style="text-align:center;">
+                  <p>Re-Calulate 1RM</p>
+                </div>
+              
                 <div id="PickADay">
                     <div class="separator-fields"></div>
                     <div class="separator-fields"></div>
@@ -80,6 +71,19 @@
                     <input class="w-button week-button" style="background-color:#1f5687; margin-top:20px;" id="Week2" type="submit" onclick=""value="Week 2" data-wait="Please wait...">
                     <input class="w-button week-button" style="background-color:#1f5687; margin-top:20px;" id="Week3" type="submit" onclick=""value="Week 3" data-wait="Please wait...">
                 </form>
+                <form id="Calc1RM" style="margin-left:3%;">
+                    <div style="width:33%; display:inline-block;">
+                      <label class="label-form light" for="weight">Weight lifted</label>
+                      <input class="w-input input-form light" id="weight-field" type="text" name="weight" data-name="weight" required="required">
+                    </div>
+                    <div style="width:33%; display:inline-block;">
+                      <label class="label-form light"  for="reps">Reps</label>
+                      <div class="block-input-combined">
+                        <input class="w-input input-form light left"  id="reps-field" name="reps" data-name="reps" required="required">
+                      </div>
+                    </div>
+                    <input class="w-button week-button" style="background-color:#1f5687;display:inline-block;position:absolute;" id="calculate" type="submit" value="Calculate 1RM" data-wait="Please wait...">
+                    </form>
                 <ul data-role="listview" class="list list-workouts" id="BenchDay" style="margin-top: 10px;">
                 <div class='separator-fields'></div>
                 <div class='separator-fields'></div>
@@ -186,14 +190,24 @@
         event.preventDefault();
       });
 
-      $('#setDay').submit(function(event){
+      $('#Calc1RM').submit(function(event){
         //alert(weekSelected);
         var dayChosen = $('#LiftDay').val();
-        if(dayChosen == "none"){
-          event.preventDefault();
-          navigator.notification.alert("Choose a main lift day");
-        }
-        else{
+          var reps = $('#reps-field').val();
+          var weight = $('#weight-field').val();
+          if(/^\d+$/.test(reps) && /^\d+$/.test(weight)){
+            OneRepMax = weight/(1.0278 - (0.0278 * reps));
+            //alert("1RM = "+OneRepMax);
+            localStorage['1RM'+dayChosen]=OneRepMax;
+            //alert(localStorage['1RM'+dayChosen]);
+          }
+          else{
+            navigator.notification.alert("Please enter valid weight and/or reps");
+          }
+          $('#Calc1RM').addClass('animated bounceOutLeft');
+          $('#Calc1RM').hide();
+          $('#reCalculate1RM').addClass('animated fadeIn');
+          $('#reCalculate1RM').show();
           var btn = $(this).find("input[type=submit]:focus" );
           console.dir(btn);
           //alert(btn.val());
@@ -206,7 +220,6 @@
           $('#BenchDay').removeClass('animated bounceOutRight');
           $('#BenchDay').addClass('animated bounceInLeft');
           $('#BenchDay').show();
-        }
 
         event.preventDefault();
       });
@@ -251,29 +264,50 @@
       }
     </script>
     <script>
-      $('#PickADay').hide();
-      $('#setDay').hide();
+      //$('#PickADay').hide();
+      //$('#setDay').hide();
+      $('#rechooseDay').hide();
       $('#reCalculate1RM').hide();
-      $('#Calc1RM').submit(function(event){
-        $('#PickADay').addClass('animated bounceInLeft');
-        $('#setDay').addClass('animated bounceInLeft');
-        $('#PickADay').show();
-        $('#setDay').show();
-        $('#Calc1RM').addClass('animated bounceOutLeft');
-        $('#Calc1RM').hide();
-        $('#reCalculate1RM').addClass('animated fadeIn');
-        $('#reCalculate1RM').show();
-        var reps = $('#reps-field').val();
-        var weight = $('#weight-field').val();
-        if(/^\d+$/.test(reps) && /^\d+$/.test(weight)){
-          OneRepMax = weight/(1.0278 - (0.0278 * reps));
-          alert("1RM = "+OneRepMax);
+      $('#Calc1RM').hide();
+      $('#setDay').submit(function(event){
+        var dayChosen = $('#LiftDay').val();
+        if(dayChosen == "none"){
+          event.preventDefault();
+          navigator.notification.alert("Choose a main lift day");
         }
         else{
-          navigator.notification.alert("Please enter valid weight and/or reps");
+          if(localStorage['1RM'+dayChosen]){
+            OneRepMax = localStorage['1RM'+dayChosen];
+            $('#reCalculate1RM').addClass('animated fadeIn');
+            $('#reCalculate1RM').show();
+            $('#PickADay').hide();
+            $('#setDay').hide();
+            $('#rechooseDay').show();
+            setReps(weekSelected);
+            //alert(btn.val());
+            $('#exerciseTitle').text(dayChosen);
+            $('#BenchDay').removeClass('animated bounceInLeft');
+            $('#BenchDay').addClass('animated bounceOutRight');
+            $('#BenchDay').hide();
+            $('#BenchDay').removeClass('animated bounceOutRight');
+            $('#BenchDay').addClass('animated bounceInLeft');
+            $('#BenchDay').show();
+          }
+          else{
+            $('#Calc1RM').addClass('animated bounceInLeft');
+            //$('#setDay').addClass('animated bounceInLeft');
+            $('#PickADay').hide();
+            $('#setDay').hide();
+            $('#rechooseDay').show();
+            //$('#Calc1RM').addClass('animated bounceOutLeft');
+            $('#Calc1RM').show();
+            //$('#reCalculate1RM').addClass('animated fadeIn');
+            //$('#reCalculate1RM').show();
         }
 
+       
 
+        }
       event.preventDefault();
 
     });
@@ -288,6 +322,22 @@
       $('#Calc1RM').show();
       $('#PickADay').hide();
       $('#setDay').hide();
+      $('#BenchDay').hide();
+    });
+
+    $('#rechooseDay').click(function(){
+      $('#rechooseDay').hide();
+      $('#reCalculate1RM').hide();
+      //$('#Calc1RM').removeClass('animated bounceInLeft');
+      //$('#Calc1RM').addClass('animated bounceOutRight');
+      //$('#Calc1RM').hide();
+      $('#Calc1RM').removeClass('animated bounceOutLeft');
+      //$('#Calc1RM').addClass('animated bounceInLeft');
+      $('#Calc1RM').hide();
+      $('#PickADay').addClass('animated bounceInLeft');
+      $('#setDay').addClass('animated bounceInLeft');
+      $('#PickADay').show();
+      $('#setDay').show();
       $('#BenchDay').hide();
     });
     </script>

@@ -83,13 +83,18 @@
   }
   </script>
   <script>
-  store.register({
+    document.addEventListener("deviceready", function(){
+ 
+    store.verbosity = store.INFO;
+    store.register({
       id: "531Routine",
       alias: "531 Routine",
       type: store.NON_CONSUMEABLE
     });
+    alert("store registered");
   store.refresh();
-  
+  alert("store refreshed");
+  show();
     function show() {
         render();
         store.when("531Routine").updated(render);
@@ -140,6 +145,7 @@
         // stop monitoring the product
         store.off(render);
     }
+  });
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>

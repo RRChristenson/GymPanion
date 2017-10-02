@@ -21,6 +21,8 @@
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places"></script>
   <script>
+    document.addEventListener("deviceready", function(){
+
     var map;
     var infowindow;
     function initMap() {
@@ -89,6 +91,7 @@
         infowindow.open(map, this);
       });
     }
+  });
   </script>
 </head>
 <body>

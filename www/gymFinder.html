@@ -17,13 +17,12 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
   <link rel="apple-touch-icon" href="img/logo.ico">
+  <script type="text/javascript" src="cordova.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places"></script>
-  <script type="text/javascript" src="cordova.js"></script>
   <script>
-    document.addEventListener("deviceready", function(){
-
+    
     var map;
     var infowindow;
     function initMap() {
@@ -32,7 +31,9 @@
         timeout: 5000,
         maximumAge: 0
       };
-      navigator.geolocation.getCurrentPosition(onSuccess, error, options);
+      document.addEventListener("deviceready", function(){
+        navigator.geolocation.getCurrentPosition(onSuccess, error, options);
+      });
       function onSuccess(pos) {
         var crd = pos.coords;
         var center ={lat: crd.latitude, lng: crd.longitude};
@@ -92,7 +93,6 @@
         infowindow.open(map, this);
       });
     }
-  });
   </script>
 </head>
 <body>

@@ -88,13 +88,13 @@
     document.addEventListener('deviceready', initializeStore, false);
 
     function initializeStore() {
-      navigator.notification.alert("In Init Store");
+      //navigator.notification.alert("In Init Store");
 
         // Let's set a pretty high verbosity level, so that we see a lot of stuff
         // in the console (reassuring us that something is happening).
         store.verbosity = store.INFO;
 
-        navigator.notification.alert("Verbosity Set");
+        //navigator.notification.alert("Verbosity Set");
 
         // We register a dummy product. It's ok, it shouldn't
        // prevent the store "ready" event from firing.
@@ -104,7 +104,7 @@
             type:  store.NON_CONSUMEABLE
         });
 
-        navigator.notification.alert("Store Registered!!");
+        //navigator.notification.alert("Store Registered!!");
 
     // When every goes as expected, it's time to celebrate!
     // The "ready" event should be welcomed with music and fireworks,

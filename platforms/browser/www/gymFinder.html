@@ -17,12 +17,12 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
   <link rel="apple-touch-icon" href="img/logo.ico">
+  <script type="text/javascript" src="cordova.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7fNd9nET2X0N9Ex_FfiyqQvzTzK1346U&libraries=places,geometry"></script>
   <script>
-    document.addEventListener("deviceready", function(){
-
+    var m_MapCenter;
     var map;
     var infowindow;
     function initMap() {
@@ -31,10 +31,13 @@
         timeout: 5000,
         maximumAge: 0
       };
-      navigator.geolocation.getCurrentPosition(onSuccess, error, options);
+      document.addEventListener("deviceready", function(){
+        navigator.geolocation.getCurrentPosition(onSuccess, error, options);
+      });
       function onSuccess(pos) {
         var crd = pos.coords;
         var center ={lat: crd.latitude, lng: crd.longitude};
+        m_MapCenter = new google.maps.LatLng(crd.latitude,crd.longitude);
         map = new google.maps.Map(document.getElementById('map'), {
         center: center,
         zoom: 13
@@ -43,7 +46,8 @@
       var service = new google.maps.places.PlacesService(map);
       service.textSearch({
         location: center,
-        radius: 6000,
+        rankby:'distance',
+        //radius: 10,
         query: 'weightlifting gym'
       }, callback);
       };
@@ -54,44 +58,67 @@
 
     function callback(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
+        alert(results.length);
         for (var i = 0; i < results.length; i++) {
-          createMarker(results[i]);
+          //if(i != 1){
+            try{
+              createMarker(results[i]);
+            }catch(e){
+
+            }
+            
+          //}
+          
         }
       }
     }
 
     function createMarker(place) {
       //get Place info
-      var placeIDen = place.placeID;
-      var placeName = place.name;
-      var placeVicinity = place.formatted_address;
-      var placeOpen = "Closed";
-      if (place.opening_hours.open_now == true){placeOpen = "Open Now"};
-      var placeLoc = place.geometry.location;
-      //create div with info on place
-      var div = document.createElement("div");
-      div.id = placeName;
-      var pgraph = document.createElement("div");
-      div.style.height = "100px";
-      div.className += "gymBox"
-      document.getElementById("bottomOfFinder").appendChild(div);
-      pgraph.style.textAlign="center";
-      pgraph.innerHTML = "<p style=color:white>"+placeName+"<br>"+placeOpen+"<br>"+placeVicinity+"</p>";
-      div.appendChild(pgraph);
-      var separator = document.createElement("div");
-      separator.setAttribute('class', 'myclass')
-      document.getElementById("bottomOfFinder").appendChild(separator);
-      var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location
-      });
+      var radius = 8000;
+      var dist = google.maps.geometry.spherical.computeDistanceBetween(m_MapCenter,place.geometry.location);
+      //alert(dist);
+      if( dist < radius){
+        var placeIDen = place.placeID;
+        var placeName = place.name;
+        //alert(placeName);
+        var placeVicinity = place.formatted_address;
+        var placeOpen = "Closed";
+        //alert(placeName);
+        //alert(placeVicinity);
+        //alert(placeOpen);
+        if (place.opening_hours.open_now == true){placeOpen = "Open Now"};
+        //var placeLoc = null;
+        //if(place.geometry.location){
+        //  placeLoc = place.geomentry.location;
+        //}
+        //alert(placeLoc);
+        //create div with info on place
+        var div = document.createElement("div");
+        div.id = placeName;
+      
+        div.style.height = "100px";
+        div.className += "gymBox"
+        document.getElementById("bottomOfFinder").appendChild(div);
+        var pgraph = document.createElement("div");
+        pgraph.style.textAlign="center";
+        pgraph.innerHTML = "<p style=color:white>"+placeName+"<br>"+placeOpen+"<br>"+placeVicinity+"</p>";
+        div.appendChild(pgraph);
+        var separator = document.createElement("div");
+        separator.setAttribute('class', 'myclass')
+        document.getElementById("bottomOfFinder").appendChild(separator);
+          var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
 
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
-      });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
     }
-  });
   </script>
 </head>
 <body>

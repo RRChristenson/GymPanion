@@ -75,7 +75,7 @@
           SetNums[div] = SetNums[div] + 1;
           var set = $("<div class='setsReps' style='clear:both;'>"+
                       "<div class='col-sm-4 follow-left text-centered'>"+
-                      "<p id='setNum"+SetNums[div]+"'>"+SetNums[div]+"</p>"+
+                      "<p id='setNum"+SetNums[div]+"' class='set"+div+"'>"+SetNums[div]+"</p>"+
                       "</div>"+
                       "<div class='col-sm-4 follow-left text-centered'>"+
                       "<p id='reps'><input class='w-input reps-form' id='reps-field' type='number' min='0' step='1' name='reps' data-name='reps' required='required'></p>"+
@@ -85,6 +85,13 @@
                       "</div>"+
                       "</div>");
           $('#setsList'+div).append(set);
+          $(".set"+div).click(function(){
+            if(SetNums[div] == $(this).text() && SetNums[div] > 1){
+              $(this).parent().parent().remove();
+              SetNums[div] = SetNums[div] - 1;
+            }
+          });
+          
         }
         function deleteExercise(name){
           divname = name.replace(/\s+/g, '');
@@ -112,7 +119,7 @@
                 +"<div class='setsReps' style='clear:both;'>"
                 +"    <div class='col-sm-4 follow-left text-centered'>"
                 +"        <div class='setRepLabel'>Set</div>"
-                +"        <p id='setNum1'>1</p>"
+                +"        <p id='setNum1' class='set"+divname+"'>1</p>"
                 +"      </div>"
                 +"      <div class='col-sm-4 follow-left text-centered'>"
                 +"          <div class='setRepLabel'>Reps</div>"
@@ -232,6 +239,8 @@
         <div class="separator-fields"></div>
         <div class="addNewSet">
             <div  ><div id="addnewExercise" class="setRepLabel">Add Exercise</div></div></div>
+            
+            <p id="help" style="text-align:center;">Press here for help</p>
             <div class="setRepLabel" style="padding-bottom:100px;"></div>
       </div>
       <div class="separator-fields"></div>
@@ -240,6 +249,7 @@
       <div class="separator-fields"></div>
       <div class="separator-fields"></div>
       <div class="separator-fields"></div>
+      
     </div>
     <div class="page-content loading-mask" id="new-stack">
       <div class="loading-icon">
@@ -248,6 +258,12 @@
     </div>
   </section>
   <script src="js/webfont.js"></script>
+  <script>
+  $('#help').click(function(){
+    navigator.notification.alert("Press Add Exercise to start adding exercises to your routine.\nIf you add to many, swipe left to delete an exercise."
+    +"\nIf you add too many sets, press the last set number to delete that set.",null,"Help");
+  });
+  </script>
   <script>
     WebFont.load({
       google: {

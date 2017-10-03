@@ -10,6 +10,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
   <link rel="apple-touch-icon" href="img/logo.ico">
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
   <script>
       function sendRequest(data){
         $.ajax({
@@ -98,37 +99,39 @@
     });
   </script>
   <script>
-    $('#search-form').submit(function(){
-      function onSuccess(pos){
-        var crd = pos.coords;
-        localStorage.lat = crd.latitude;
-        localStorage.long = crd.longitude;
-        data = {
-        "username":localStorage.username,
-        "radius":radius,
-        "gender":gender,
-        "latitude":localStorage.lat,
-        "longitude":localStorage.long,
-        "authToken":localStorage.authToken
-      };
-      sendRequest(data);
-      }
-      var gender = "male";
-      if (document.getElementById('female').checked) {
-        gender = "female";
-      }
-      else if(document.getElementById('male').checked){
-        gender = "male";
-      }
-      var radius = document.getElementById("search-radius").value;
-      var options = {
-        enableHighAccuracy: true,
-        timeout: 1000,
-        maximumAge: 0
-      };
-      navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+    document.addEventListener("deviceready", function(){
+      $('#search-form').submit(function(){
+        function onSuccess(pos){
+          var crd = pos.coords;
+          localStorage.lat = crd.latitude;
+          localStorage.long = crd.longitude;
+          data = {
+            "username":localStorage.username,
+            "radius":radius,
+            "gender":gender,
+            "latitude":localStorage.lat,
+            "longitude":localStorage.long,
+            "authToken":localStorage.authToken
+        };
+        sendRequest(data);
+        }
+        var gender = "male";
+        if (document.getElementById('female').checked) {
+          gender = "female";
+        }
+        else if(document.getElementById('male').checked){
+          gender = "male";
+        }
+        var radius = document.getElementById("search-radius").value;
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 1000,
+          maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
       return false;
     });
+  });
   </script>
   <script type="text/javascript" src="js/modernizr.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>

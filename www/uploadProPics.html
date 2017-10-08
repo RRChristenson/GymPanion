@@ -39,7 +39,7 @@
       //$("#mainProPic").attr("src", response.profilePic);
     },
     error : function() {
-    navigator.notification.alert("error getting profile picture for navigation menu");
+    navigator.notification.alert("Error uploading pictures, try again later");
     }
     });
     var pictureSource; 
@@ -60,7 +60,7 @@
       for(i = 1; i < 5; i++){
         if(localStorage.getItem("profileURL"+i) != "none"){
           localStorage.uploadpic = i;
-          alert(localStorage.getItem("profileURL"+i));
+          //alert(localStorage.getItem("profileURL"+i));
           sendImage(localStorage.getItem("profileURL"+i));
         }
       }
@@ -86,7 +86,7 @@
         window.location=winLoc;
         }, function(error){
           console.dir(error);
-        alert(error.message)
+        //alert(error.message)
         }, options);
     }
     function getPhoto(source) {

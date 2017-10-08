@@ -34,14 +34,14 @@
             <div class="separator-fields"></div>
         <div class="homebox">
           <div class="w-slider home-slider" data-animation="slide" data-duration="500" data-infinite="1" data-nav-spacing="5" data-delay="4000" data-autoplay="1">
-            <div class="w-slider-mask">
-              <div class="w-slide slide" id="f1bg">
+            <div class="w-slider-mask" id="slide-mask">
+              <!--<div class="w-slide slide" id="f1bg">
                 <h1 class ="featured-user" id="f1" background="white">Featured User: </h1>
-              </div>
-              <div class="w-slide slide bg2" id="f2bg">
-              <h1 class ="featured-user" id="f2" background="white">Featured User: </h1></div>
-              <div class="w-slide slide bg3" id="f3bg">
-                <h1 class ="featured-user" id="f3" background="white">Featured User: </h1></div>
+              </div>-->
+              <!--<div class="w-slide slide bg2" id="f2bg" style="display:none">
+              <h1 class ="featured-user" id="f2" background="white" style="display:none">Featured User: </h1></div>
+              <div class="w-slide slide bg3" id="f3bg" style="display:none">
+                <h1 class ="featured-user" id="f3" background="white" style="display:none">Featured User: </h1></div>-->
             </div>
             <div class="w-slider-arrow-left arrow-icon">
               <div class="w-icon-slider-left"></div>
@@ -79,8 +79,8 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
-  <script type="text/javascript"> $.ajax({
-    
+  <script type="text/javascript"> 
+          $.ajax({
            type : "GET",
            url : "http://fitpanion.com/getRecentFormChecks",
            dataType : 'json',
@@ -88,12 +88,16 @@
             let debug = document.getElementById("debug");
             var i = 1;
                 for (var key in response){
-                    let div = document.getElementById("f"+i+"bg");
                     var attrName = key;
                     var attrValue = response[key];
-                    div.style.backgroundImage = "url('"+attrValue+"')";
-                    let text = document.getElementById("f"+i);
-                    text.innerHTML += key;
+                    var $divLoaded = $("<div class=\"w-slide slide\" >"
+                    +"<h1 class =\"featured-user\" id="+key+" background=\"white\" style=\"background-image:\"url('"+attrValue+"')\">Featured User: "+key+"</h1>"
+                    +"</div>");
+                    $divLoaded.click(function(){
+                      window.location="profile.html#"+key+"&featured";
+                    })
+                   $divLoaded.css("background-image", "url("+attrValue+"");//style.backgroundImage="url('"+attrValue+"')";
+                    $('#slide-mask').append($divLoaded);
                     i++;
                 }
            },
@@ -101,6 +105,11 @@
                alert(xhr+"Errr is occured"+ppp+rrr);
            }
        });
+  </script>
+  <script>
+    function gotoProfile(key){
+      window.location="profile.html#"+key+"&featured";
+    }
   </script>
   <!--[if lte IE 9]><script src="js/placeholders.min.js"></script><![endif]-->
 </body>

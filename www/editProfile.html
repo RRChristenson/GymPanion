@@ -131,13 +131,18 @@
                dataType : 'json',
                data: data,
                success: function(response){   
-                navigator.notification.alert("Profile Updated");
-                 loc = "profile.html#"+localStorage.username+"&";
-                 window.location=loc;
-       
+                if(response == "success")
+                {
+                  navigator.notification.alert("Profile Updated");
+                  loc = "profile.html#"+localStorage.username+"&";
+                  window.location=loc;
+                }
+                else{
+                  navigator.notification.alert("There was an error, try again later.");
+                }
                },
                error : function() {
-                   navigator.notification.alert("Invalid Username or Password");
+                   navigator.notification.alert("Oops something went wrong! Try again later!");
                }
            });
       return false;

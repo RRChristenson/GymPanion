@@ -89,7 +89,6 @@ $.ajax({\
         $("#menuProPic").attr("src", response.profilePic);\
   },\
        error : function() {\
-           navigator.notification.alert("error getting profile picture for navigation menu");\
        }\
    });\
 </script>\

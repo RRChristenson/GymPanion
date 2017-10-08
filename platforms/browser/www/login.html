@@ -101,6 +101,37 @@
       return false;
     });
   </script>
+  <script>
+  if (localStorage.getItem("username") != null && localStorage.getItem("authToken") != null) {
+    data = {
+           "username":localStorage.username,
+           "authToken":localStorage.authToken,
+           };
+    $.ajax({
+        
+               type : "GET",
+               url : "http://fitpanion.com/rememberMe",
+               contentType:'application/json; charset=utf-8',
+               dataType : 'json',
+               data: data,
+               success: function(response){   
+                    var authenticated = response.Authenticated;
+                    if (authenticated == 'true'){
+                      window.location = "home.html";
+                      //localStorage.username=user;
+                      localStorage.authenticated=true;
+                      //localStorage.authToken = response.Token;
+                    }      
+                    else if(authenticated == 'false'){
+                      //navigator.notification.alert("Invalid Username or Password");
+                    }
+               },
+               error : function() {
+                   //navigator.notification.alert("Invalid Username or Password");
+               }
+           });
+  }
+  </script>
   <script type="text/javascript" src="js/framework.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/login.js"></script>

@@ -1,6 +1,10 @@
 if(window.location.hash) {
     hash = window.location.hash
     username = hash.substr(1, hash.indexOf('&')-1);
+    var isFeaturedUserClick = false;
+    if(hash.indexOf('featured')>0){
+        isFeaturedUserClick = true;
+    }
     data = {
         "username":username
        };
@@ -73,7 +77,7 @@ if(window.location.hash) {
         }
     var usernameHREF = "chat.html#channel="+channel+"&recip="+username;
     document.getElementById("sendMessage").setAttribute('href',usernameHREF);
-    if (username == localStorage.username)
+    if (username.toLowerCase() == localStorage.username.toLowerCase())
         {
             document.getElementById("sendMessage").style.display="none";
             var editString = "<a href='editProfile.html'><p>Edit Profile</p></a>"
@@ -82,13 +86,26 @@ if(window.location.hash) {
             document.getElementById("profilePicture").setAttribute('href',uploadProPics);
         }
     else{
-        var menuButton = document.getElementById("menu-button");
-        $("#menu-wrapper").empty();
-        var backButton = $("<div class=\"message-button navbar-button left\""
-        +"<div class=\"navbar-button-icon\">"
-        +"<div class=\"icon ion-arrow-left-a\" id=\"backIcon\" onclick=\"goBack()\"></div>");
-        +"</div>"
-        $("#menu-wrapper").append(backButton);
+            var menuButton = document.getElementById("menu-button");
+            $("#menu-wrapper").empty();
+            var backButton = $("<div class=\"message-button navbar-button left\""
+            +"<div class=\"navbar-button-icon\">"
+            +"<div class=\"icon ion-arrow-left-a\" id=\"backIcon\" onclick=\"goBack()\"></div>");
+            +"</div>"
+            $("#menu-wrapper").append(backButton);
+    }
+    if(isFeaturedUserClick){
+            var menuButton = document.getElementById("menu-button");
+            $("#menu-wrapper").empty();
+            var backButton = $("<div class=\"message-button navbar-button left\""
+            +"<div class=\"navbar-button-icon\">"
+            +"<div class=\"icon ion-arrow-left-a\" id=\"backIcon\" onclick=\"goHome()\"></div>");
+            +"</div>"
+            $("#menu-wrapper").append(backButton);
+
+            function goHome(){
+                window.location="home.html";
+            }
     }
     function goBack(){
         window.location="nearbyList.html#"+username+"&";

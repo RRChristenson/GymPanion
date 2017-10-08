@@ -82,17 +82,17 @@ function checkChatDatabase(){
     dataType : 'json',
     data: data,
     success: function(response){
-    for (var channel in response){
-      var channelName = response[channel];
-      //alert(channelName.channelID);
-      //localStorage.currRecip=channelName.recipient;
-      //localStorage.newMessage = false;
-      subscribe(channelName);
-      }
+    if(response != "No chats found"){
+      for (var channel in response){
+        var channelName = response[channel];
+        subscribe(channelName);
+        }
+    }
+
    //subscribe(response);
   },
   error : function() {
-    navigator.notification.alert("error getting profile picture for navigation menu");
+    //navigator.notification.alert("error getting profile picture for navigation menu");
   }
   });
   setTimeout(checkChatDatabase, 5000);

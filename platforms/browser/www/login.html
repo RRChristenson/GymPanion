@@ -86,7 +86,7 @@
                     var authenticated = response.Authenticated;
                     if (authenticated == 'true'){
                       window.location = "home.html";
-                      localStorage.username=user;
+                      localStorage.username=user.toLowerCase();
                       localStorage.authenticated=true;
                       localStorage.authToken = response.Token;
                     }      
@@ -118,16 +118,12 @@
                     var authenticated = response.Authenticated;
                     if (authenticated == 'true'){
                       window.location = "home.html";
-                      //localStorage.username=user;
                       localStorage.authenticated=true;
-                      //localStorage.authToken = response.Token;
                     }      
                     else if(authenticated == 'false'){
-                      //navigator.notification.alert("Invalid Username or Password");
                     }
                },
                error : function() {
-                   //navigator.notification.alert("Invalid Username or Password");
                }
            });
   }

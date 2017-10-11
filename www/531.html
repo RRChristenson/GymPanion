@@ -39,7 +39,7 @@
         var OneRepMax;
         $('#emailIcon').removeClass('icon ion-email');
         $('#emailIcon').addClass('icon ion-ios-plus-empty');
-        $("#emailIcon").attr("onclick","newWorkout()");
+        $("#emailIcon").attr("onclick","Save531()");
         //$('#emailIcon').addClass('icon ion-ios-plus-empty');
         //$("#emailIcon").attr("onclick","newWorkout()");
         </script>
@@ -337,6 +337,61 @@
       $('#setDay').show();
       $('#BenchDay').hide();
     });
+    </script>
+    <script>
+      $("#saveRoutine").click(function(){
+        saveRoutine();
+      })
+
+      function saveRoutine(){
+      //Ajax to send routine to server here
+      var data = {'username':localStorage.username,
+                  'authToken':localStorage.authToken,
+                  'Bench1RM':localStorage['1RMBench'],
+                  'Deadlift1RM':localStorage['1RMDeadlift'],
+                  'Squat1RM':localStorage['1RMSquat'],
+                  'Overhead1RM':localStorage['1RMOverhead Press'],
+                  };
+      $.ajax({
+        type : "GET",
+        url : "http://fitpanion.com/Save531",
+        dataType : 'json',
+        data: data,
+        success: function(response){
+          navigator.notification.alert(response);
+        },
+        error : function() {
+          navigator.notification.alert("There was an error saving your routine. Try again later!");
+        }
+      });
+      }
+    </script>
+    <script>
+    document.addEventListener("deviceready", function(){
+      //Load Routine from server
+      loadRoutine();
+    });
+
+    function loadRoutine(){
+      //Ajax to send routine to server here
+      var data = {'username':localStorage.username,
+                  'authToken':localStorage.authToken
+                  };
+      $.ajax({
+        type : "GET",
+        url : "http://fitpanion.com/Load531",
+        dataType : 'json',
+        data: data,
+        success: function(response){
+          //navigator.notification.alert(response);
+          localStorage['1RMOverhead Press'] = response.Overhead1RM;
+        },
+        error : function() {
+          //navigator.notification.alert("There was an error retrieving your routine. Try again later!");
+          
+        }
+      });
+      }
     </script>
 </body>
 </html>

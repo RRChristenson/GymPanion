@@ -98,9 +98,9 @@
                       navigator.notification.alert("Registration complete, proceed to login");
                       window.location = "login.html";
                     }
-                    if (response.error)
+                    if (response.Error)
                     {
-                      navigator.notification.alert(response.error);
+                      navigator.notification.alert(response.Error);
                     }        
                },
                error : function() {

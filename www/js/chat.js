@@ -1,3 +1,5 @@
+var profilepicURL;
+
 $(document).ready(function () {
   function addChatToDB(){
     data = {
@@ -40,6 +42,7 @@ $(document).ready(function () {
     localStorage.chan = hash.substr(9, hash.indexOf('&')-9);
     localStorage.recip = window.location.hash.substring(hash.indexOf('&')+7,hash.length);
     document.getElementById('chatTitle').innerHTML="Chat with "+localStorage.recip;
+    getProPic(localStorage.recip);
     // hash found
 } else {
     // No hash found
@@ -71,7 +74,7 @@ $(document).ready(function () {
  
   // Handles all the messages coming in from pubnub.subscribe.
   function handleMessage(message, history) {
-    if(message.username == localStorage.username)
+    if(message.username.toLowerCase() == localStorage.username.toLowerCase())
       {
         var messageEll = $("<li class='list-chat right'>"
         + "<div class='w-clearfix column-right chat right'>"
@@ -82,12 +85,11 @@ $(document).ready(function () {
       }
     else if(message.username != localStorage.username)
       {
-        var profilepicURL= getProPic(message.username);
         //alert(profilepicURL);
         var messageEll = $("<li class='w-clearfix list-chat'>"
         + "<div class='column-left chat'>"
         + "<a href='profile.html#"+message.username+"&'>"
-        + "<div class='image-message chat'><img src="+profilepicURL+">"
+        + "<div class='image-message chat'><img class='chatProPic' src="+profilepicURL+">"
         + "</div>"
         + "</a>"
         + "</div>"
@@ -186,7 +188,9 @@ function getProPic(user){
     dataType : 'json',
     data: data,
     success: function(response){
-      localStorage.profilepic = response.profilePic;
+      profilepicURL = response.profilePic;
+      $('.chatProPic').attr('src',profilepicURL);
+      //alert(profilepicURL);
   },
   error : function() {
     navigator.notification.alert("error getting profile picture for navigation menu");

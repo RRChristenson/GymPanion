@@ -358,7 +358,15 @@
         dataType : 'json',
         data: data,
         success: function(response){
-          navigator.notification.alert(response);
+          if(response.Saved == 'True')
+          {
+            navigator.notification.alert("Routine saved successfully!");
+          }
+          else
+          {
+            navigator.notification.alert("There was an error saving your routine!")
+          }
+          
         },
         error : function() {
           navigator.notification.alert("There was an error saving your routine. Try again later!");
@@ -383,11 +391,20 @@
         dataType : 'json',
         data: data,
         success: function(response){
-          //navigator.notification.alert(response);
-          localStorage['1RMOverhead Press'] = response.Overhead1RM;
+          if (response.result == "Success")
+          {
+          localStorage['1RMOverhead Press'] = response.OHP;
+          localStorage['1RMBench'] = response.Bench;
+          localStorage['1RMDeadlift'] = response.Dead;
+          localStorage['1RMSquat'] = response.Squat;
+          }
+          else{
+
+          }
+
+
         },
         error : function() {
-          //navigator.notification.alert("There was an error retrieving your routine. Try again later!");
           
         }
       });
